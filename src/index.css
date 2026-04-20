@@ -658,18 +658,15 @@ section {
   transform: scale(0.92);
 }
 
-[data-reveal].revealed {
-  opacity: 1;
+[data-reveal="fade"] {
   transform: none;
 }
 
-/* ── Stagger delays for children ── */
-[data-delay="100"] { transition-delay: 100ms; }
-[data-delay="200"] { transition-delay: 200ms; }
-[data-delay="300"] { transition-delay: 300ms; }
-[data-delay="400"] { transition-delay: 400ms; }
-[data-delay="500"] { transition-delay: 500ms; }
-[data-delay="600"] { transition-delay: 600ms; }
+[data-reveal].revealed,
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
 
 /* ── Lenis recommended styles ── */
 html.lenis, html.lenis body {

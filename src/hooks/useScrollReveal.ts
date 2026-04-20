@@ -5,32 +5,36 @@ export function useScrollReveal() {
   const location = useLocation();
 
   useEffect(() => {
-    // Slight delay to ensure DOM is painted after route change
-    const timer = setTimeout(() => {
-      const elements = document.querySelectorAll('[data-reveal]:not(.revealed)');
+    let observer: IntersectionObserver | null = null;
 
-      const observer = new IntersectionObserver(
+    // Slight delay to ensure DOM is painted after route change
+    const timer = window.setTimeout(() => {
+      const elements = document.querySelectorAll(
+        '[data-reveal]:not(.revealed):not(.is-revealed)'
+      );
+
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              observer.unobserve(entry.target);
+              const delay = entry.target.getAttribute('data-delay') || '0';
+              const ms = parseInt(delay, 10) || 0;
+              window.setTimeout(() => {
+                entry.target.classList.add('revealed', 'is-revealed');
+              }, ms);
+              observer?.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
 
-      elements.forEach((el) => observer.observe(el));
-
-      // Cleanup will happen via the outer return
-      (timer as any)._observer = observer;
+      elements.forEach((el) => observer!.observe(el));
     }, 50);
 
     return () => {
-      const obs = (timer as any)._observer as IntersectionObserver | undefined;
-      obs?.disconnect();
-      clearTimeout(timer);
+      observer?.disconnect();
+      window.clearTimeout(timer);
     };
   }, [location.pathname]);
 }
