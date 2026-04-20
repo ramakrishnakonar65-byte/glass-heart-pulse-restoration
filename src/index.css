@@ -1,0 +1,638 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=optional');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Ink scale */
+  --ink: #0C0B09;
+  --ink-2: #2E2C26;
+  --ink-3: #5A5649;
+  --ink-4: #8A8478;
+  --ink-5: #B8B2A6;
+
+  /* Warm backgrounds */
+  --bg: #FDFBF7;
+  --surface: #F5F0E8;
+  --surface-2: #EDE7D9;
+  --border: #E0D9C8;
+  --border-2: #CEC7B4;
+
+  /* Gold — primary brand accent */
+  --gold: #B8882C;
+  --gold-l: #D4A84B;
+  --gold-ll: #E8C87A;
+  --gold-lll: #F5E4B8;
+  --gold-bg: rgba(184,136,44,0.06);
+  --gold-bg2: rgba(184,136,44,0.12);
+  --gold-border: rgba(184,136,44,0.20);
+
+  /* Forest green — secondary brand */
+  --forest: #3A5530;
+  --forest-l: #5A7A50;
+  --forest-ll: #C0D4BB;
+  --forest-bg: rgba(58,85,48,0.07);
+  --forest-border: rgba(58,85,48,0.22);
+
+  /* Radius */
+  --r: 12px;
+  --r-sm: 6px;
+  --r-xs: 3px;
+
+  /* Tailwind semantic tokens (HSL) */
+  --background: 40 33% 98%;
+  --foreground: 36 15% 4%;
+
+  --card: 38 30% 96%;
+  --card-foreground: 36 15% 4%;
+
+  --popover: 38 30% 96%;
+  --popover-foreground: 36 15% 4%;
+
+  --primary: 38 73% 36%;
+  --primary-foreground: 40 33% 98%;
+
+  --secondary: 38 18% 90%;
+  --secondary-foreground: 36 12% 20%;
+
+  --muted: 38 15% 92%;
+  --muted-foreground: 34 12% 50%;
+
+  --accent: 100 28% 26%;
+  --accent-foreground: 40 33% 98%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 38 25% 84%;
+  --input: 38 25% 84%;
+  --ring: 38 73% 36%;
+
+  --radius: 0.75rem;
+
+  --sidebar-background: 40 33% 98%;
+  --sidebar-foreground: 36 15% 4%;
+  --sidebar-primary: 38 73% 36%;
+  --sidebar-primary-foreground: 40 33% 98%;
+  --sidebar-accent: 38 18% 94%;
+  --sidebar-accent-foreground: 36 15% 4%;
+  --sidebar-border: 38 25% 84%;
+  --sidebar-ring: 38 73% 36%;
+}
+
+.dark {
+  --background: 36 15% 4%;
+  --foreground: 38 20% 92%;
+  --card: 36 15% 6%;
+  --card-foreground: 38 20% 92%;
+  --popover: 36 15% 6%;
+  --popover-foreground: 38 20% 92%;
+  --primary: 38 73% 36%;
+  --primary-foreground: 40 33% 98%;
+  --secondary: 36 10% 15%;
+  --secondary-foreground: 38 20% 92%;
+  --muted: 36 10% 15%;
+  --muted-foreground: 34 12% 60%;
+  --accent: 100 28% 26%;
+  --accent-foreground: 38 20% 92%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 38 20% 92%;
+  --border: 36 10% 18%;
+  --input: 36 10% 18%;
+  --ring: 38 73% 36%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Editorial photography filter */
+  img {
+    filter: saturate(0.88) contrast(0.96);
+  }
+}
+
+/* ─── GRAIN TEXTURE (always on) ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── GOLD TOP RULE ─── */
+.top-rule {
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--forest) 8%,
+    var(--forest-l) 20%,
+    var(--gold) 35%,
+    var(--gold-ll) 50%,
+    var(--gold) 65%,
+    var(--forest-l) 80%,
+    var(--forest) 92%,
+    transparent 100%);
+}
+
+/* ─── FONT CLASSES ─── */
+.font-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-body {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── HERO ─── */
+.hero-section {
+  cursor: none;
+}
+
+.hero-cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid rgba(253,251,247,0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.hero-cursor--active {
+  width: 36px;
+  height: 36px;
+  border-color: var(--gold);
+  background: rgba(184,136,44,0.15);
+}
+
+/* Ken Burns */
+.hero-bg-img {
+  transform: scale(1.05);
+  transition: transform 8s ease-out;
+}
+.hero-bg-img--loaded {
+  transform: scale(1);
+}
+
+/* Hero grain */
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+}
+
+/* Scroll indicator */
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: rgba(253,251,247,0.3);
+  animation: hero-pulse 2s ease-in-out infinite;
+}
+
+@keyframes hero-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ─── MARQUEE ─── */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 45s linear infinite;
+}
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 14px 32px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--gold-l);
+  transform: translateY(-1px);
+}
+
+/* ─── LENS FLARE HOVER ─── */
+.hero-lens-flare::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.25) 45%,
+    rgba(255,255,255,0.08) 50%,
+    transparent 55%
+  );
+  transform: skewX(-15deg);
+  transition: none;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-lens-flare:hover::before {
+  animation: lensFlare 0.6s ease forwards;
+}
+@keyframes lensFlare {
+  0%   { left: -75%; }
+  100% { left: 150%; }
+}
+
+.btn-secondary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--ink-2);
+  padding: 13px 28px;
+  border-radius: 4px;
+  border: 1px solid var(--border-2);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-secondary:hover {
+  border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+/* ─── LIQUID GLASS ─── */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+
+.dark-section {
+  background: var(--ink);
+  color: #F0EBE0;
+}
+
+/* ─── PAGE TRANSITIONS ─── */
+@keyframes pageLeave {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.96); }
+}
+@keyframes pageEnter {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.page-leaving { animation: pageLeave 280ms cubic-bezier(0.4,0,0.2,1) forwards; }
+.page-entering { animation: pageEnter 350ms cubic-bezier(0.4,0,0.2,1) forwards; }
+
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  animation: page-transition-exit 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.page-transition-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: page-transition-scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes page-transition-exit {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 1; transform: scaleY(0.005); }
+  100% { opacity: 0; transform: scaleY(0.005) scaleX(0); pointer-events: none; }
+}
+
+@keyframes page-transition-scale-in {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ─── SPOTLIGHT CARD ─── */
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(184,136,44,0.08);
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 80%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-spotlight:hover::before,
+.card-spotlight:focus-within::before {
+  opacity: 1;
+}
+
+.card-spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── COUNTER ANIMATION ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter { animation: fadeUp 0.35s cubic-bezier(0.4,0,0.2,1) both; }
+
+/* ─── GOLD RADIAL GLOW ─── */
+.gold-glow::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,136,44,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── MONOGRAM AVATAR ─── */
+.monogram-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-bg2);
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+
+/* ─── MAVERICK PAGE ─── */
+@keyframes maverick-gradient {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.maverick-hero {
+  background: linear-gradient(135deg, #1B475D 0%, #16384A 50%, #1B475D 100%);
+  background-size: 400% 400%;
+  animation: maverick-gradient 8s ease infinite;
+}
+
+.maverick-btn-filled {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #FAD564;
+  color: #1B475D;
+  padding: 14px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.maverick-btn-filled:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.maverick-btn-outline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 13px 28px;
+  border-radius: 6px;
+  border: 1px solid #8EBD9D;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, background 0.2s;
+}
+.maverick-btn-outline:hover {
+  background: rgba(142,189,157,0.1);
+}
+
+.maverick-card {
+  border: 1px solid #B4BD62;
+  border-radius: 12px;
+  transition: transform 0.25s ease, border-left 0.25s ease;
+}
+.maverick-card:hover {
+  transform: translateY(-4px);
+  border-left: 3px solid #FAD564;
+}
+
+.mav-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mav-fade--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── MAVERICK STATS MARQUEE ─── */
+@keyframes marquee-mav {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track-mav {
+  display: flex;
+  width: max-content;
+  animation: marquee-mav 18s linear infinite;
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-img { transition: none; transform: scale(1) !important; }
+  .hero-scroll-line { animation: none; }
+  .animate-scroll-left { animation: none; }
+  .page-transition-overlay { animation: none; opacity: 0; pointer-events: none; }
+  .page-transition-content { animation: none; }
+  .maverick-hero { animation: none; }
+  .mav-fade { opacity: 1; transform: none; }
+  .marquee-track-mav { animation: none; }
+}
+
+/* Smooth GPU rendering for animated elements */
+[data-framer-motion],
+canvas {
+  will-change: transform;
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts during animation */
+section {
+  contain: layout style;
+}
+
+/* ============================================================
+   White-page override: convert dark-section text → readable on white
+   Applied via .force-light-bg wrapper on About & Maverick pages
+   ============================================================ */
+.force-light-bg,
+.force-light-bg section,
+.force-light-bg [class*="bg-[#0a0a0a]"],
+.force-light-bg [class*="bg-[#050505]"],
+.force-light-bg [class*="bg-[#0f0f0f]"],
+.force-light-bg [class*="bg-black"] {
+  background-color: #ffffff !important;
+}
+
+/* Gradient backgrounds that fade into black — neutralize */
+.force-light-bg [class*="from-green-950"],
+.force-light-bg [class*="to-black"],
+.force-light-bg [class*="via-black"],
+.force-light-bg [class*="from-black"] {
+  background-image: none !important;
+  background-color: #f6fdf7 !important;
+}
+
+/* Text: white & white/opacity → ink */
+.force-light-bg .text-white,
+.force-light-bg [class*="text-white/"] {
+  color: #0a0a0a !important;
+}
+.force-light-bg .text-white\/50,
+.force-light-bg .text-white\/55,
+.force-light-bg .text-white\/60,
+.force-light-bg .text-white\/70,
+.force-light-bg .text-white\/80 {
+  color: rgba(10, 10, 10, 0.72) !important;
+}
+.force-light-bg .text-white\/40,
+.force-light-bg .text-white\/30,
+.force-light-bg .text-white\/20 {
+  color: rgba(10, 10, 10, 0.55) !important;
+}
+
+/* Subtle white surfaces — convert to faint green tint */
+.force-light-bg [class*="bg-white/5"],
+.force-light-bg [class*="bg-white/[0.02]"],
+.force-light-bg [class*="bg-white/[0.03]"],
+.force-light-bg [class*="bg-white/[0.04]"] {
+  background-color: rgba(34, 197, 94, 0.06) !important;
+}
+
+/* White borders → soft gray */
+.force-light-bg [class*="border-white/5"],
+.force-light-bg [class*="border-white/10"],
+.force-light-bg [class*="border-white/20"] {
+  border-color: rgba(10, 10, 10, 0.12) !important;
+}
+
+/* Buttons that were green-on-black: keep, but ensure contrast on white CTA bg */
+.force-light-bg .text-black {
+  color: #ffffff !important;
+}
+
+/* The "RCIIF" central circle uses gradient text on dark — keep white text inside */
+.force-light-bg .from-green-600.to-emerald-700 .text-white,
+.force-light-bg .from-green-600.to-emerald-700 [class*="text-white/"],
+.force-light-bg .bg-green-500 .text-black {
+  color: #ffffff !important;
+}
+.force-light-bg .bg-green-500.text-black,
+.force-light-bg .bg-green-400.text-black {
+  color: #0a0a0a !important;
+}
+
+/* About / Maverick middle hero card — deep green gradient with white text
+   so it visually pops against the white page (matches Maverick FounderNeeds card) */
+.force-light-bg .rciif-center-card {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%) !important;
+  border-color: rgba(34, 197, 94, 0.4) !important;
+  box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.35) !important;
+}
+.force-light-bg .rciif-center-card,
+.force-light-bg .rciif-center-card * {
+  color: #ffffff !important;
+}
+.force-light-bg .rciif-center-card .rciif-accent {
+  color: #6ee7b7 !important;
+}
+.force-light-bg .rciif-center-card .rciif-tag,
+.force-light-bg .rciif-center-card [class*="bg-white/5"] {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+/* Apply same treatment to the Maverick FounderNeeds middle card if it ever lands on white bg */
+.force-light-bg .rciif-center-card .bg-gradient-to-br {
+  background-image: none !important;
+}
