@@ -29,6 +29,7 @@ export default function AboutSection() {
       <div className="relative max-w-[1100px] mx-auto px-6 md:px-20">
         {/* Header */}
         <div
+          data-reveal="left"
           className={`max-w-2xl mb-16 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <span
@@ -70,6 +71,8 @@ export default function AboutSection() {
           {VALUES.map((v, i) => (
             <div
               key={v.title}
+              data-reveal
+              data-delay={`${Math.min(i * 100, 600)}`}
               className={`card-spotlight group p-6 rounded-xl border transition-all duration-500 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}

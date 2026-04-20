@@ -78,6 +78,8 @@ export default function TestimonialsSection() {
               return (
                 <motion.div
                   key={t.id}
+                  data-reveal="scale"
+                  data-delay={`${Math.min(index * 100, 600)}`}
                   className="absolute inset-0 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 flex flex-col justify-between cursor-grab active:cursor-grabbing"
                   style={{ zIndex: 3 - offset }}
                   drag={isCurrent ? "x" : false}

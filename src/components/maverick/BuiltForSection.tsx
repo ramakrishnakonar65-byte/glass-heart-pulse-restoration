@@ -42,9 +42,11 @@ export default function BuiltForSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 px-4 md:px-0">
-          {people.map(p => (
+          {people.map((p, i) => (
             <motion.div
               key={p.id}
+              data-reveal
+              data-delay={`${(i + 1) * 100}`}
               className="relative p-8 rounded-2xl border border-gray-200 bg-white overflow-hidden cursor-default group transition-shadow duration-300 hover:shadow-xl"
               onHoverStart={() => setHovered(p.id)}
               onHoverEnd={() => setHovered(null)}

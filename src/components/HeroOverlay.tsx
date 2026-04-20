@@ -116,13 +116,13 @@ export default function HeroOverlay() {
             <AnimatedHeading text={"Shaping tomorrow\nwith vision and action."} />
 
             <FadeIn delay={800} duration={1000}>
-              <p className="text-base md:text-lg text-gray-300 mb-5">
+              <p data-reveal data-delay="300" className="text-base md:text-lg text-gray-300 mb-5">
                 We back visionaries and craft ventures that define what comes next.
               </p>
             </FadeIn>
 
             <FadeIn delay={1200} duration={1000}>
-              <div className="flex flex-wrap gap-4">
+              <div data-reveal data-delay="400" className="flex flex-wrap gap-4">
                 <button className="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                   Start a Chat
                 </button>
