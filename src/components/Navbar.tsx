@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { getLenis } from '@/lib/lenis';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -22,6 +23,14 @@ export default function Navbar() {
   const isHome = location.pathname === '/';
 
   useEffect(() => {
+    const lenis = getLenis();
+    if (lenis) {
+      const handler = ({ scroll }: { scroll: number }) => setScrolled(scroll > 40);
+      lenis.on('scroll', handler);
+      return () => {
+        lenis.off('scroll', handler);
+      };
+    }
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
