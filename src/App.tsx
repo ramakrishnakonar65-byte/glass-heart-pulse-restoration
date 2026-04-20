@@ -53,8 +53,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <LenisProvider>
       <BrowserRouter>
+        <LenisProvider>
         <Routes>
           <Route path="/" element={<Index />} />
 
@@ -113,8 +113,8 @@ const App = () => (
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </LenisProvider>
       </BrowserRouter>
-      </LenisProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
