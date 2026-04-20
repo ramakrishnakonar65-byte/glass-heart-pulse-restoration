@@ -35,7 +35,7 @@ const steps = [
 
 function SectionHeader() {
   return (
-    <div className="px-4 md:px-8 mb-10 flex-shrink-0">
+    <div data-reveal data-delay="0" className="px-4 md:px-8 mb-10 flex-shrink-0">
       <span className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase">
         The Process
       </span>
@@ -108,9 +108,11 @@ export default function JourneySection() {
           <SectionHeader />
           <div className="overflow-hidden px-8">
             <motion.div style={{ x }} className="flex gap-6 w-max">
-              {steps.map((s) => (
+              {steps.map((s, i) => (
                 <div
                   key={s.number}
+                  data-reveal
+                  data-delay={`${i * 100}`}
                   className="w-[32vw] flex-shrink-0 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 relative overflow-hidden group hover:border-green-500/40 transition-colors duration-500"
                 >
                   <StepCard step={s} />

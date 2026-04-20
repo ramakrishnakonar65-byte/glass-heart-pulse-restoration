@@ -16,7 +16,7 @@ export default function PartnersStrip() {
   return (
     <section className="w-full py-20 md:py-24 px-4 bg-white overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center px-4 md:px-8 mb-12">
+        <div data-reveal data-delay="0" className="text-center px-4 md:px-8 mb-12">
           <span className="text-green-600 font-[Instrument_Sans] text-sm tracking-widest uppercase">
             Backed By
           </span>
@@ -32,6 +32,8 @@ export default function PartnersStrip() {
           {ASSOCIATES.map((name, i) => (
             <motion.div
               key={name}
+              data-reveal="scale"
+              data-delay={`${i * 80}`}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { getLenis } from '@/lib/lenis';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface PageLayoutProps {
@@ -21,12 +20,7 @@ export default function PageLayout({ children, title, description }: PageLayoutP
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', description);
     }
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo(0, 0);
-    }
+    // Scroll-to-top on route change is handled centrally by LenisProvider.
   }, [title, description]);
 
   return (

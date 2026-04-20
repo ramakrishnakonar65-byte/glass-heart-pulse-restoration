@@ -22,11 +22,13 @@ export default function ApplyCTASection() {
             {/* Left: Text */}
             <div className="flex-1 z-10 w-full md:w-1/2">
               <span className="text-green-400 text-sm font-[Instrument_Sans] uppercase tracking-widest">Applications Open</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[Instrument_Serif] text-white mt-3 mb-4">Apply for<br />Maverick Pont</h2>
+              <h2 data-reveal data-delay="0" className="text-3xl md:text-4xl lg:text-5xl font-bold font-[Instrument_Serif] text-white mt-3 mb-4">Apply for<br />Maverick Pont</h2>
               <p className="text-white/60 font-[Instrument_Sans] mb-8 max-w-md text-sm md:text-base">Join the next cohort of ambitious founders. Limited seats. Unlimited potential. Applications reviewed on a rolling basis.</p>
 
               <motion.a
                 href="/maverick/apply"
+                data-reveal
+                data-delay="200"
                 className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-400 text-black font-semibold font-[Instrument_Sans] px-8 py-4 rounded-xl text-base md:text-lg transition-colors duration-200 group"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
