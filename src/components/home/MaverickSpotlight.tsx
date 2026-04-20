@@ -8,20 +8,20 @@ export default function MaverickSpotlight() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left */}
           <div>
-            <span className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase">
+            <span data-reveal data-delay="0" className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase block">
               Our Flagship Programme
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-white mt-3 mb-6 leading-[1.05]">
+            <h2 data-reveal data-delay="100" className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-white mt-3 mb-6 leading-[1.05]">
               Maverick Pont
             </h2>
-            <p className="text-white/65 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-8 max-w-xl">
+            <p data-reveal data-delay="200" className="text-white/65 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-8 max-w-xl">
               A curated incubation ecosystem for early-stage founders. Two
               cohorts a year, twelve companies per cohort, and a full operating
               system around each one — mentors, capital, infrastructure and a
               path to market.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div data-reveal data-delay="350" className="flex flex-col sm:flex-row gap-3">
               <motion.a
                 href="/maverick/apply"
                 whileHover={{ scale: 1.04 }}
@@ -44,6 +44,8 @@ export default function MaverickSpotlight() {
 
           {/* Right */}
           <motion.div
+            data-reveal="right"
+            data-delay="200"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}

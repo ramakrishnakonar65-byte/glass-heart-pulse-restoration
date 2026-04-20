@@ -81,15 +81,15 @@ export default function IdentitySection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left */}
           <div>
-            <span className="text-green-600 font-[Instrument_Sans] text-sm tracking-widest uppercase">
+            <span data-reveal data-delay="0" className="text-green-600 font-[Instrument_Sans] text-sm tracking-widest uppercase block">
               Our Identity
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-[#0a0a0a] mt-2 mb-6 leading-[1.05]">
+            <h2 data-reveal data-delay="100" className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-[#0a0a0a] mt-2 mb-6 leading-[1.05]">
               From Kharghar
               <br />
               to the World
             </h2>
-            <p className="text-[#0a0a0a]/65 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-8 max-w-xl">
+            <p data-reveal data-delay="200" className="text-[#0a0a0a]/65 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-8 max-w-xl">
               RCIIF is a DPIIT-recognised incubator under Rayat Shikshan Sanstha —
               a 100+ year legacy of education, applied to the work of building
               the next generation of Indian companies.
@@ -97,6 +97,8 @@ export default function IdentitySection() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <motion.div
+                data-reveal="left"
+                data-delay="300"
                 whileHover={{ y: -4 }}
                 className="p-5 rounded-2xl border border-amber-200/60 bg-gradient-to-br from-amber-50 to-white"
               >
@@ -111,6 +113,8 @@ export default function IdentitySection() {
                 </p>
               </motion.div>
               <motion.div
+                data-reveal="left"
+                data-delay="400"
                 whileHover={{ y: -4 }}
                 className="p-5 rounded-2xl border border-blue-200/60 bg-gradient-to-br from-blue-50 to-white"
               >
@@ -129,6 +133,8 @@ export default function IdentitySection() {
 
           {/* Right — stats card */}
           <motion.div
+            data-reveal="right"
+            data-delay="200"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}

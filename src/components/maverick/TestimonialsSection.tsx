@@ -62,7 +62,7 @@ export default function TestimonialsSection() {
   return (
     <section className="w-full py-20 md:py-24 px-4 bg-[#0a0a0a] text-white overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col items-center mb-16">
+        <div data-reveal data-delay="0" className="flex flex-col items-center mb-16">
           <span className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase mb-3">Founder Stories</span>
           <h2 className="text-3xl md:text-5xl font-bold font-[Instrument_Serif] text-center mb-4">They Built Here.<br />So Can You.</h2>
           <div className="w-20 h-0.5 bg-green-500 mt-2" />

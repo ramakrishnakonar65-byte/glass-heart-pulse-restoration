@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { getLenis } from '@/lib/lenis';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface PageLayoutProps {

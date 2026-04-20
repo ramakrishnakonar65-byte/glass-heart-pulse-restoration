@@ -51,7 +51,7 @@ export default function SixPillarsSection() {
   return (
     <section className="w-full py-20 md:py-28 px-4 bg-white overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center px-4 md:px-8">
+        <div data-reveal data-delay="0" className="text-center px-4 md:px-8">
           <span className="text-green-600 font-[Instrument_Sans] text-sm tracking-widest uppercase">
             What We Do
           </span>
@@ -68,6 +68,8 @@ export default function SixPillarsSection() {
           {PILLARS.map((p, i) => (
             <motion.div
               key={p.title}
+              data-reveal
+              data-delay={`${i * 100}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}

@@ -28,13 +28,13 @@ export default function ContactCTASection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left */}
           <div>
-            <span className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase">
+            <span data-reveal data-delay="0" className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase block">
               Get In Touch
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-white mt-3 mb-6 leading-[1.05]">
+            <h2 data-reveal data-delay="0" className="text-4xl md:text-5xl lg:text-6xl font-bold font-[Instrument_Serif] text-white mt-3 mb-6 leading-[1.05]">
               Start Your Journey
             </h2>
-            <p className="text-white/60 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-10 max-w-md">
+            <p data-reveal data-delay="150" className="text-white/60 font-[Instrument_Sans] text-base md:text-lg leading-relaxed mb-10 max-w-md">
               Whether you're building, backing or partnering — there's a door
               into RCIIF that fits.
             </p>
