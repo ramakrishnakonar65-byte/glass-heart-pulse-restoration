@@ -34,7 +34,7 @@ export default function IncubateesSection() {
   return (
     <section id="incubatees" ref={ref} className="py-20 md:py-24 relative overflow-hidden">
       <div className="relative max-w-[1100px] mx-auto px-6 md:px-20">
-        <div className={`max-w-2xl mb-14 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div data-reveal className={`max-w-2xl mb-14 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span
             style={{
               fontFamily: "'JetBrains Mono', monospace",
@@ -74,6 +74,8 @@ export default function IncubateesSection() {
           {INCUBATEES.map((inc, i) => (
             <div
               key={inc.name}
+              data-reveal
+              data-delay={`${Math.min(i * 100, 600)}`}
               className={`card-spotlight group p-5 rounded-xl border transition-all duration-500 cursor-default ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}

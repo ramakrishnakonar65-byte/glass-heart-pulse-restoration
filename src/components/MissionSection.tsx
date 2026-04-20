@@ -15,9 +15,12 @@ export default function MissionSection() {
     <section ref={ref} className="dark-section py-24 md:py-32 relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto px-6 md:px-20 text-center">
         <blockquote
+          data-reveal
           className={`max-w-2xl mx-auto transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p
+            data-reveal
+            data-delay="200"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,

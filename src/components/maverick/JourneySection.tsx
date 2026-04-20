@@ -1,5 +1,6 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useScroll, useTransform, motion } from "framer-motion"
+import { getLenis } from "@/lib/lenis"
 
 const steps = [
   {
@@ -82,6 +83,19 @@ export default function JourneySection() {
     offset: ["start start", "end start"],
   })
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-78%"])
+
+  // Keep framer-motion's useScroll in sync with Lenis-driven scrolling.
+  useEffect(() => {
+    const lenis = getLenis()
+    if (!lenis) return
+    const onScroll = () => {
+      // Lenis already updates window.scrollY; framer reads from it.
+    }
+    lenis.on("scroll", onScroll)
+    return () => {
+      lenis.off("scroll", onScroll)
+    }
+  }, [])
 
   return (
     <>

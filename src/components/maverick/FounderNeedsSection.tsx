@@ -50,9 +50,9 @@ const services = [
   },
 ]
 
-function ServiceItem({ icon, secondaryIcon, title, description, variants, delay }: any) {
+function ServiceItem({ icon, secondaryIcon, title, description, variants, delay, revealDelay }: any) {
   return (
-    <motion.div className="flex flex-col group" variants={variants} transition={{ delay }} whileHover={{ y: -5 }}>
+    <motion.div data-reveal data-delay={revealDelay} className="flex flex-col group" variants={variants} transition={{ delay }} whileHover={{ y: -5 }}>
       <div className="flex items-center gap-3 mb-3">
         <motion.div className="text-green-400 bg-green-500/10 p-3 rounded-lg group-hover:bg-green-500/20 relative transition-colors duration-300"
           whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}>
@@ -108,7 +108,7 @@ export default function FounderNeedsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           <div className="space-y-8 md:space-y-16">
             {services.filter(s => s.position === "left").map((s, i) => (
-              <ServiceItem key={i} {...s} variants={itemVariants} delay={i * 0.2} direction="left" />
+              <ServiceItem key={i} {...s} variants={itemVariants} delay={i * 0.2} revealDelay={`${(i + 1) * 100}`} direction="left" />
             ))}
           </div>
 
@@ -140,7 +140,7 @@ export default function FounderNeedsSection() {
 
           <div className="space-y-8 md:space-y-16">
             {services.filter(s => s.position === "right").map((s, i) => (
-              <ServiceItem key={i} {...s} variants={itemVariants} delay={i * 0.2} direction="right" />
+              <ServiceItem key={i} {...s} variants={itemVariants} delay={i * 0.2} revealDelay={`${(i + 1) * 100}`} direction="right" />
             ))}
           </div>
         </div>

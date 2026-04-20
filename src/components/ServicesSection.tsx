@@ -62,6 +62,8 @@ export default function ServicesSection() {
           {SERVICES.map((s, i) => (
             <div
               key={s.title}
+              data-reveal
+              data-delay={`${Math.min(i * 100, 600)}`}
               className={`card-spotlight group relative p-6 rounded-xl border cursor-default overflow-hidden transition-all duration-500 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}

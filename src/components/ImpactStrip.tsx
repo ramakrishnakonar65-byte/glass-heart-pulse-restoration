@@ -26,6 +26,8 @@ export default function ImpactStrip() {
           {STATS.map((s, i) => (
             <div
               key={s.label}
+              data-reveal
+              data-delay={`${i * 150}`}
               className={`text-center transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
