@@ -19,13 +19,20 @@ export function useInView(ref: React.RefObject<HTMLElement | null>, threshold = 
 }
 
 export default function SectionHeader({ eyebrow, title, description, className = '' }: SectionHeaderProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref);
+
   return (
-    <div className={`max-w-2xl mb-14 ${className}`}>
+    <div
+      ref={ref}
+      className={`max-w-2xl mb-14 ${className} ${inView ? 'is-revealed' : ''}`}
+      style={{ willChange: 'opacity, transform' }}
+    >
       <span
         style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: '9px',
-          letterSpacing: '0.2em',
+          letterSpacing: '0.22em',
           textTransform: 'uppercase',
           color: 'var(--gold)',
           display: 'flex',
@@ -35,15 +42,15 @@ export default function SectionHeader({ eyebrow, title, description, className =
         }}
       >
         {eyebrow}
-        <span style={{ width: '48px', height: '1px', background: 'var(--gold-border)' }} />
+        <span className="gold-rule-animated" />
       </span>
       <h2
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 300,
           fontSize: 'clamp(1.7rem, 3.2vw, 2.4rem)',
-          letterSpacing: '-0.018em',
-          lineHeight: 1.15,
+          letterSpacing: '-0.02em',
+          lineHeight: 1.1,
           marginBottom: '12px',
           color: 'var(--ink)',
         }}
