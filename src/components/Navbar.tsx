@@ -122,6 +122,17 @@ export default function Navbar() {
                   background: 'var(--gold)',
                 }}
               />
+              <span
+                aria-hidden
+                className="absolute left-1/2 -translate-x-1/2 rounded-full transition-opacity duration-300"
+                style={{
+                  bottom: '-4px',
+                  width: '4px',
+                  height: '4px',
+                  background: 'var(--gold)',
+                  opacity: isActive(link.href) ? 1 : 0,
+                }}
+              />
             </Link>
           ))}
         </div>
