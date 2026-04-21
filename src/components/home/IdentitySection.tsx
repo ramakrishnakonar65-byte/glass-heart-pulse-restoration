@@ -49,10 +49,19 @@ function StatCounter({
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
       className="text-left"
     >
-      <div className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a]">
-        {prefix}
-        {value}
-        {suffix}
+      <div className="relative inline-block">
+        {active && (
+          <span
+            aria-hidden
+            className="counter-pulse absolute inset-0"
+            style={{ animationDelay: `${delay}s` }}
+          />
+        )}
+        <div className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a] relative">
+          {prefix}
+          {value}
+          {suffix}
+        </div>
       </div>
       <div className="text-xs md:text-sm font-[Instrument_Sans] text-[#0a0a0a]/55 uppercase tracking-widest mt-2">
         {label}
@@ -99,7 +108,7 @@ export default function IdentitySection() {
               <motion.div
                 data-reveal="left"
                 data-delay="300"
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -4, boxShadow: '0 20px 60px rgba(184,136,44,0.08)' }}
                 className="p-5 rounded-2xl border border-amber-200/60 bg-gradient-to-br from-amber-50 to-white"
               >
                 <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 mb-3">
@@ -115,7 +124,7 @@ export default function IdentitySection() {
               <motion.div
                 data-reveal="left"
                 data-delay="400"
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -4, boxShadow: '0 20px 60px rgba(184,136,44,0.08)' }}
                 className="p-5 rounded-2xl border border-blue-200/60 bg-gradient-to-br from-blue-50 to-white"
               >
                 <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-3">
