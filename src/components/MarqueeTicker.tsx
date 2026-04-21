@@ -6,6 +6,10 @@ const items = [
   'IndusInd Bank',
   'Maverick Pont',
   'Cohort 2026',
+  'DPIIT Recognised',
+  'Kharghar, Navi Mumbai',
+  '12+ Incubatees',
+  '₹12Cr+ Facilitated',
 ];
 
 export default function MarqueeTicker() {
@@ -33,7 +37,12 @@ export default function MarqueeTicker() {
             }}
           >
             {item}
-            <span className="ml-6" style={{ color: 'var(--gold)', opacity: 0.5 }}>·</span>
+            <span
+              className="ml-6"
+              style={{ color: 'var(--gold)', opacity: i % 2 === 0 ? 0.6 : 0.45 }}
+            >
+              {i % 2 === 0 ? '·' : '✦'}
+            </span>
           </span>
         ))}
       </div>
