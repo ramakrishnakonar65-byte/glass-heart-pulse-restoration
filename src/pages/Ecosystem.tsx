@@ -51,28 +51,33 @@ export default function Ecosystem() {
 
           {/* Pill Nav */}
           <div className="flex gap-2 mb-10 flex-wrap">
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="px-5 py-2.5 rounded-full transition-all"
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '10px',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  background: activeTab === tab ? 'var(--gold)' : 'var(--surface)',
-                  color: activeTab === tab ? 'var(--bg)' : 'var(--ink-3)',
-                  border: `1px solid ${activeTab === tab ? 'var(--gold)' : 'var(--border)'}`,
-                }}
-              >
-                {tab}
-              </button>
-            ))}
+            {TABS.map((tab) => {
+              const active = activeTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className="px-5 py-2.5 rounded-full transition-all duration-300"
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '10px',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    background: active ? 'var(--gold)' : 'var(--surface)',
+                    color: active ? 'var(--bg)' : 'var(--ink-3)',
+                    border: `1px solid ${active ? 'var(--gold)' : 'var(--border)'}`,
+                    transform: active ? 'scale(1.04)' : 'scale(1)',
+                    boxShadow: active ? '0 4px 20px rgba(184,136,44,0.25)' : 'none',
+                  }}
+                >
+                  {tab}
+                </button>
+              );
+            })}
           </div>
 
           {/* Service Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div key={activeTab} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 page-fade-up">
             {SERVICES[activeTab].map((s) => (
               <SpotlightCard key={s.title} className="p-6 rounded-xl border" spotlightColor="rgba(184, 136, 44, 0.25)">
                 <span className="text-2xl mb-3 block">{s.icon}</span>

@@ -32,7 +32,7 @@ export default function Portfolio() {
 
   return (
     <PageLayout title="Portfolio" description="RCIIF's portfolio of 12 incubatees and 15+ associate partners across healthcare, fintech, AI, and consumer sectors.">
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-20 page-fade-up">
         <div className="max-w-[1100px] mx-auto px-6 md:px-20">
           <SectionHeader
             eyebrow="PORTFOLIO"
@@ -63,9 +63,13 @@ export default function Portfolio() {
           </div>
 
           {/* Incubatee Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
+          <div key={filter} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-20 page-fade-up">
             {filtered.map((inc) => (
-              <div key={inc.name} className="card-spotlight p-5 rounded-xl border" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+              <div
+                key={inc.name}
+                className="card-spotlight p-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:border-[var(--gold-border)] hover:shadow-[0_12px_32px_rgba(184,136,44,0.08)]"
+                style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
+              >
                 <MonogramAvatar initials={inc.initials} size="sm" className="mb-3 rounded-lg" />
                 <h3 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500, fontSize: '14px', color: 'var(--ink)', marginBottom: '4px' }}>{inc.name}</h3>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', background: 'var(--gold-bg)', border: '1px solid var(--gold-border)', padding: '2px 8px', borderRadius: '20px', display: 'inline-block', marginBottom: '8px' }}>{inc.sector}</span>

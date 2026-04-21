@@ -12,7 +12,7 @@ const STEPS = [
 export default function Investors() {
   return (
     <PageLayout title="For Investors" description="Access curated deal flow, co-investment opportunities, and portfolio diversity from RCIIF's Maverick Pont accelerator.">
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-20 page-fade-up">
         <div className="max-w-[1100px] mx-auto px-6 md:px-20">
           <SectionHeader
             eyebrow="FOR INVESTORS"
