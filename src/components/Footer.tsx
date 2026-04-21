@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
@@ -11,14 +12,49 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '/faq' },
 ];
 
+function LiveClock() {
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    const tick = () =>
+      setTime(
+        new Date().toLocaleTimeString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          hour12: false,
+        })
+      );
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span
+      style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: '8px',
+        color: 'var(--ink-5)',
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Kharghar, IST · {time}
+    </span>
+  );
+}
+
 export default function Footer() {
   return (
     <footer
-      className="py-16 border-t"
+      className="pt-20 pb-10 border-t overflow-hidden"
       style={{ background: 'var(--ink)', borderColor: 'rgba(253,251,247,0.08)' }}
     >
-      <div className="max-w-[1100px] mx-auto px-6 md:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
+        {/* Oversized wordmark */}
+        <span className="footer-wordmark mb-2">RCIIF</span>
+
+        {/* Shimmer line */}
+        <div className="gold-shimmer-line my-8" />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 max-w-[1100px] mx-auto">
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2.5 mb-4 no-underline">
@@ -74,7 +110,7 @@ export default function Footer() {
                 <li key={l.label}>
                   <Link
                     to={l.href}
-                    className="transition-colors no-underline hover:text-[var(--gold)]"
+                    className="group inline-flex items-center gap-2 no-underline transition-colors"
                     style={{
                       fontFamily: "'Outfit', sans-serif",
                       fontSize: '13px',
@@ -82,7 +118,13 @@ export default function Footer() {
                       textDecoration: 'none',
                     }}
                   >
-                    {l.label}
+                    <span className="transition-colors group-hover:text-[var(--gold)]">{l.label}</span>
+                    <span
+                      className="opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                      style={{ color: 'var(--gold)', fontSize: '11px' }}
+                    >
+                      →
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -113,12 +155,13 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+          className="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3 max-w-[1100px] mx-auto"
           style={{ borderColor: 'rgba(253,251,247,0.08)' }}
         >
           <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '8px', color: 'var(--ink-5)', letterSpacing: '0.08em' }}>
             © {new Date().getFullYear()} RCIIF · <Link to="/faq" style={{ color: 'var(--ink-5)', textDecoration: 'none' }}>Privacy Policy</Link> · <Link to="/faq" style={{ color: 'var(--ink-5)', textDecoration: 'none' }}>Terms</Link> · <Link to="/sitemap" style={{ color: 'var(--ink-5)', textDecoration: 'none' }}>Sitemap</Link>
           </p>
+          <LiveClock />
         </div>
       </div>
     </footer>

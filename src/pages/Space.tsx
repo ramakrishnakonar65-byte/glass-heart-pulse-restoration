@@ -29,8 +29,17 @@ export default function Space() {
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
             {GALLERY.map((img, i) => (
-              <div key={i} className="rounded-xl overflow-hidden aspect-square">
-                <img src={img} alt={`RCIIF space gallery ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+              <div
+                key={i}
+                className="rounded-xl overflow-hidden aspect-square group"
+                style={{ position: 'relative' }}
+              >
+                <img
+                  src={img}
+                  alt={`RCIIF space gallery ${i + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>
@@ -42,14 +51,33 @@ export default function Space() {
         <div className="max-w-[1100px] mx-auto px-6 md:px-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {ZONES.map((z) => (
-              <div key={z.title} className="card-spotlight rounded-xl border overflow-hidden" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+              <div
+                key={z.title}
+                className="card-spotlight rounded-xl border overflow-hidden group transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--gold-border)]"
+                style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
+              >
                 <div className="aspect-video overflow-hidden">
-                  <img src={z.img} alt={z.title} className="w-full h-full object-cover" loading="lazy" />
+                  <img
+                    src={z.img}
+                    alt={z.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="p-5">
+                <div className="p-5 relative">
                   <span className="text-xl mb-2 block">{z.icon}</span>
                   <h3 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500, fontSize: '16px', color: 'var(--ink)', marginBottom: '4px' }}>{z.title}</h3>
                   <p style={{ fontSize: '13px', color: 'var(--ink-3)', lineHeight: 1.7 }}>{z.desc}</p>
+                  <span
+                    aria-hidden
+                    className="absolute left-5 right-5 bottom-3 transition-all duration-500"
+                    style={{
+                      height: '2px',
+                      background: 'linear-gradient(90deg, var(--gold), transparent)',
+                      transform: 'scaleX(0)',
+                      transformOrigin: 'left',
+                    }}
+                  />
                 </div>
               </div>
             ))}

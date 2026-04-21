@@ -7,7 +7,30 @@ export default function MaverickSpotlight() {
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left */}
-          <div>
+          <div className="relative">
+            {/* Floating dots */}
+            <motion.span
+              aria-hidden
+              className="absolute -top-6 -left-4 rounded-full pointer-events-none"
+              style={{ width: 80, height: 80, background: 'var(--gold)', opacity: 0.06 }}
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.span
+              aria-hidden
+              className="absolute top-32 -left-12 rounded-full pointer-events-none"
+              style={{ width: 120, height: 120, background: 'var(--gold)', opacity: 0.05 }}
+              animate={{ y: [0, -16, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.span
+              aria-hidden
+              className="absolute bottom-0 left-20 rounded-full pointer-events-none"
+              style={{ width: 60, height: 60, background: 'var(--gold)', opacity: 0.07 }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
             <span data-reveal data-delay="0" className="text-green-400 font-[Instrument_Sans] text-sm tracking-widest uppercase block">
               Our Flagship Programme
             </span>
@@ -52,21 +75,27 @@ export default function MaverickSpotlight() {
             transition={{ duration: 0.7 }}
             className="relative"
           >
-            <div className="relative rounded-3xl border border-green-500/20 bg-gradient-to-br from-green-950/40 to-black p-8 md:p-10">
+            <div className="relative rounded-3xl border border-green-500/20 bg-gradient-to-br from-green-950/40 to-black p-8 md:p-10 green-card-pulse">
               <div className="grid grid-cols-3 gap-6 pb-8 mb-8 border-b border-white/10">
                 {[
                   { v: "12", l: "Companies" },
                   { v: "₹12Cr+", l: "Facilitated" },
                   { v: "6", l: "Sectors" },
-                ].map((s) => (
-                  <div key={s.l}>
+                ].map((s, i) => (
+                  <motion.div
+                    key={s.l}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
+                  >
                     <div className="text-2xl md:text-3xl font-bold font-[Instrument_Serif] text-white">
                       {s.v}
                     </div>
                     <div className="text-[10px] md:text-xs font-[Instrument_Sans] text-white/45 uppercase tracking-widest mt-1">
                       {s.l}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               <Quote className="w-8 h-8 text-green-400/60 mb-3" />

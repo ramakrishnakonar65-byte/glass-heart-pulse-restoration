@@ -31,7 +31,7 @@ export default function Apply() {
 
   return (
     <PageLayout title="Apply to Maverick Pont" description="Apply to RCIIF's Maverick Pont accelerator. Check eligibility, prepare documents, and submit your application.">
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-20 page-fade-up">
         <div className="max-w-[800px] mx-auto px-6 md:px-20">
           <SectionHeader
             eyebrow="APPLY"

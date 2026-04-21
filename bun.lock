@@ -36,6 +36,7 @@
         "@react-three/drei": "^9.122.0",
         "@react-three/fiber": "^8.18.0",
         "@tailwindcss/typography": "^0.5.16",
+        "@tanstack/query-core": "5.99.0",
         "@tanstack/react-query": "^5.83.0",
         "@testing-library/jest-dom": "^6.6.0",
         "@testing-library/react": "^16.0.0",

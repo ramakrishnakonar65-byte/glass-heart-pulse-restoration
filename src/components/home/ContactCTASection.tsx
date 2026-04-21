@@ -9,17 +9,23 @@ export default function ContactCTASection() {
     org: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const onChange = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
     const subject = encodeURIComponent(`RCIIF Enquiry — ${form.name || "Visitor"}`);
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nOrganisation: ${form.org}\n\n${form.message}`
     );
-    window.location.href = `mailto:hello@rciif.org?subject=${subject}&body=${body}`;
+    setTimeout(() => {
+      window.location.href = `mailto:hello@rciif.org?subject=${subject}&body=${body}`;
+      setLoading(false);
+    }, 1500);
   };
 
   return (
@@ -115,12 +121,22 @@ export default function ContactCTASection() {
             </div>
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.02 }}
+              disabled={loading}
+              whileHover={{ scale: 1.02, boxShadow: '0 4px 24px rgba(34,197,94,0.3)' }}
               whileTap={{ scale: 0.98 }}
-              className="group w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-black font-semibold font-[Instrument_Sans] px-7 py-4 rounded-xl text-base transition-colors"
+              className="group w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-black font-semibold font-[Instrument_Sans] px-7 py-4 rounded-xl text-base transition-colors disabled:opacity-80"
             >
-              Send Message
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {loading ? (
+                <>
+                  <span className="inline-block animate-spin">⟳</span>
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </motion.button>
           </motion.form>
         </div>

@@ -142,8 +142,12 @@ export default function JourneySection() {
           ))}
         </div>
         <div className="flex justify-center gap-2 mt-4">
-          {steps.map((s) => (
-            <div key={s.number} className="w-1.5 h-1.5 rounded-full bg-white/20" />
+          {steps.map((s, i) => (
+            <div
+              key={s.number}
+              className={i === 0 ? 'w-8 h-0.5 rounded-full' : 'w-4 h-0.5 rounded-full bg-white/20'}
+              style={i === 0 ? { background: 'var(--gold)' } : undefined}
+            />
           ))}
         </div>
       </section>

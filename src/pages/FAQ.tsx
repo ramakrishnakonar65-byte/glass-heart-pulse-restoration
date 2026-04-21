@@ -45,7 +45,7 @@ export default function FAQ() {
 
   return (
     <PageLayout title="FAQ" description="Frequently asked questions about RCIIF — for founders, investors, institutions, and corporate partners.">
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-20 page-fade-up">
         <div className="max-w-[800px] mx-auto px-6 md:px-20">
           <SectionHeader
             eyebrow="FAQ"
@@ -55,26 +55,70 @@ export default function FAQ() {
           <div className="space-y-10">
             {FAQ_GROUPS.map((group) => (
               <div key={group.label}>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 500, fontSize: '16px', color: 'var(--ink)', marginBottom: '12px' }}>{group.label}</h3>
+                <h3
+                  className="flex items-center gap-3 mb-4"
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '9px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.2em',
+                    color: 'var(--gold)',
+                  }}
+                >
+                  {group.label}
+                  <span style={{ flex: '0 0 48px', height: '1px', background: 'var(--gold-border)' }} />
+                </h3>
                 <div className="space-y-2">
                   {group.items.map((item, i) => {
                     const key = `${group.label}-${i}`;
+                    const isOpen = !!openItems[key];
                     return (
-                      <div key={key} className="rounded-lg border overflow-hidden" style={{ borderColor: 'var(--border)' }}>
+                      <div
+                        key={key}
+                        className="rounded-lg border overflow-hidden relative transition-all"
+                        style={{
+                          borderColor: isOpen ? 'var(--gold-border)' : 'var(--border)',
+                        }}
+                      >
+                        {/* Left gold draw-down border */}
+                        <span
+                          aria-hidden
+                          className="absolute left-0 top-0 bottom-0 transition-all duration-500"
+                          style={{
+                            width: '2px',
+                            background: 'var(--gold)',
+                            clipPath: isOpen ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)',
+                          }}
+                        />
                         <button
                           onClick={() => toggle(key)}
-                          className="w-full text-left p-4 flex items-center justify-between"
+                          className="w-full text-left p-4 flex items-center justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] focus-visible:ring-offset-2 rounded"
                           style={{ background: 'var(--surface)', fontFamily: "'Outfit', sans-serif", fontSize: '14px', color: 'var(--ink)' }}
                         >
                           {item.q}
-                          <span style={{ color: 'var(--gold)', fontSize: '18px' }}>{openItems[key] ? '−' : '+'}</span>
+                          <span
+                            style={{
+                              color: 'var(--gold)',
+                              fontSize: '18px',
+                              transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                              transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1)',
+                              display: 'inline-block',
+                            }}
+                          >
+                            +
+                          </span>
                         </button>
-                        {openItems[key] && (
-                          <div className="px-4 pb-4" style={{ background: 'var(--surface)' }}>
-                            {/* TODO: Fill with verified answers from RCIIF team */}
+                        <div
+                          className="overflow-hidden transition-all duration-500"
+                          style={{
+                            maxHeight: isOpen ? '300px' : '0px',
+                            background: 'var(--surface)',
+                          }}
+                        >
+                          <div className="px-4 pb-4 pt-1">
                             <p style={{ fontSize: '13px', color: 'var(--ink-3)', lineHeight: 1.7 }}>{item.a}</p>
                           </div>
-                        )}
+                        </div>
                       </div>
                     );
                   })}
