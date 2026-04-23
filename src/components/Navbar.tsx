@@ -8,11 +8,7 @@ const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Maverick Pont', href: '/maverick' },
   { label: 'Ecosystem', href: '/ecosystem' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Our Space', href: '/space' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Board', href: '/board' },
 ];
 
 export default function Navbar() {
