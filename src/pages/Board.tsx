@@ -1,19 +1,16 @@
 import { motion } from 'framer-motion';
-import { Scale, Users, TrendingUp } from 'lucide-react';
+import { Scale, Users, TrendingUp, ArrowRight } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
-import SectionHeader from '@/components/SectionHeader';
-import MonogramAvatar from '@/components/MonogramAvatar';
-import SpotlightCard from '@/components/SpotlightCard';
 
 const board = [
-  { name: 'Dr. Anil D. Patil',     role: 'Chairman',      initials: 'AP', color: 'gold' as const   },
-  { name: 'Prof. Suresh Jadhav',   role: 'Vice Chairman', initials: 'SJ', color: 'forest' as const },
-  { name: 'Dr. Meera Kulkarni',    role: 'Director',      initials: 'MK', color: 'gold' as const   },
-  { name: 'Mr. Rajesh Deshmukh',   role: 'Board Member',  initials: 'RD', color: 'forest' as const },
-  { name: 'Dr. Sandeep Gokhale',   role: 'Board Member',  initials: 'SG', color: 'gold' as const   },
-  { name: 'Ms. Vandana Shah',      role: 'Board Member',  initials: 'VS', color: 'forest' as const },
-  { name: 'Mr. Prakash Joshi',     role: 'Advisor',       initials: 'PJ', color: 'gold' as const   },
-  { name: 'Dr. Nilesh Karanjekar', role: 'Advisor',       initials: 'NK', color: 'forest' as const },
+  { name: 'Dr. Anil D. Patil',     role: 'Chairman',      initials: 'AP' },
+  { name: 'Prof. Suresh Jadhav',   role: 'Vice Chairman', initials: 'SJ' },
+  { name: 'Dr. Meera Kulkarni',    role: 'Director',      initials: 'MK' },
+  { name: 'Mr. Rajesh Deshmukh',   role: 'Board Member',  initials: 'RD' },
+  { name: 'Dr. Sandeep Gokhale',   role: 'Board Member',  initials: 'SG' },
+  { name: 'Ms. Vandana Shah',      role: 'Board Member',  initials: 'VS' },
+  { name: 'Mr. Prakash Joshi',     role: 'Advisor',       initials: 'PJ' },
+  { name: 'Dr. Nilesh Karanjekar', role: 'Advisor',       initials: 'NK' },
 ];
 
 const VALUES = [
@@ -22,23 +19,23 @@ const VALUES = [
   { Icon: TrendingUp,  title: 'Impact-First',   desc: 'Our board steers RCIIF toward measurable outcomes for startups, students, and communities.' },
 ];
 
-/* ── Hero ── */
+/* ── Hero — dark editorial with green accents ── */
 function BoardHero() {
   const headline1 = 'The People Behind';
   const headline2 = 'RCIIF';
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden" style={{ background: '#0C0B09' }}>
-      {/* Floating orbs */}
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+      {/* Floating green orbs */}
       <motion.div
         className="absolute rounded-full blur-3xl pointer-events-none"
-        style={{ width: 480, height: 480, background: 'rgba(184,136,44,1)', opacity: 0.04, top: '15%', left: '8%' }}
+        style={{ width: 480, height: 480, background: 'rgb(34,197,94)', opacity: 0.06, top: '15%', left: '8%' }}
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         className="absolute rounded-full blur-3xl pointer-events-none"
-        style={{ width: 520, height: 520, background: 'rgba(95,183,117,1)', opacity: 0.04, bottom: '10%', right: '5%' }}
+        style={{ width: 520, height: 520, background: 'rgb(34,197,94)', opacity: 0.04, bottom: '10%', right: '5%' }}
         animate={{ y: [0, -25, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
       />
@@ -49,27 +46,18 @@ function BoardHero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '10px',
-            letterSpacing: '0.28em',
-            textTransform: 'uppercase',
-            color: 'var(--gold)',
-            display: 'inline-flex', alignItems: 'center', gap: '14px',
-            marginBottom: '40px',
-          }}
+          className="text-green-400 font-[Instrument_Sans] uppercase mb-10 inline-flex items-center gap-3"
+          style={{ fontSize: '11px', letterSpacing: '0.28em' }}
         >
           Governance & Leadership
-          <span style={{ display: 'inline-block', height: '1px', width: '48px', background: 'linear-gradient(90deg, var(--gold), transparent)' }} />
+          <span className="inline-block h-px w-12 bg-gradient-to-r from-green-400 to-transparent" />
         </motion.span>
 
         {/* Headline line 1 — staggered chars */}
         <h1
+          className="text-white font-[Instrument_Serif] font-bold"
           style={{
-            fontFamily: "'Instrument Serif', serif",
-            fontWeight: 400,
             fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-            color: '#F0EBE0',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
             margin: 0,
@@ -88,16 +76,14 @@ function BoardHero() {
           ))}
         </h1>
 
-        {/* Headline line 2 — gold italic giant wordmark */}
+        {/* Headline line 2 — green italic giant wordmark */}
         <h2
+          className="font-[Instrument_Serif] italic bg-gradient-to-r from-green-300 via-emerald-400 to-teal-300 bg-clip-text text-transparent"
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            fontStyle: 'italic',
+            fontWeight: 700,
             fontSize: 'clamp(5rem, 12vw, 9rem)',
-            color: 'var(--gold)',
             lineHeight: 1,
-            letterSpacing: '0.04em',
+            letterSpacing: '-0.02em',
             marginTop: '12px',
             marginBottom: '32px',
           }}
@@ -120,13 +106,11 @@ function BoardHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-white/60 font-[Instrument_Sans] mx-auto"
           style={{
-            fontFamily: "'Outfit', sans-serif",
             fontSize: '15px',
             lineHeight: 1.75,
-            color: 'rgba(253,251,247,0.5)',
             maxWidth: '52ch',
-            margin: '0 auto',
           }}
         >
           Veteran educators, entrepreneurs, and institutional leaders steering RCIIF's mission with decades of combined experience.
@@ -140,89 +124,68 @@ function BoardHero() {
           className="absolute left-1/2 -translate-x-1/2"
           style={{ bottom: '40px' }}
         >
-          <span className="hero-scroll-line block" />
+          <span className="block w-px h-10 bg-green-500/40 animate-pulse" />
         </motion.div>
       </div>
     </section>
   );
 }
 
-/* ── Board Grid ── */
+/* ── Board Grid — white background ── */
 function BoardGrid() {
   return (
-    <section className="w-full py-24 md:py-32 px-4 bg-[var(--bg)]">
+    <section className="w-full py-24 md:py-32 px-4 bg-white">
       <div className="max-w-[1100px] mx-auto">
-        <SectionHeader
-          eyebrow="Board of Directors"
-          title={<>Leadership</>}
-          description="Distinguished individuals guiding RCIIF's strategic direction and institutional governance."
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-4"
+            style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
+            Board of Directors
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a] mb-4 leading-[1.05]">
+            Leadership
+          </h2>
+          <div className="w-20 h-0.5 bg-green-500 mx-auto mb-4" />
+          <p className="text-[#0a0a0a]/60 max-w-2xl mx-auto font-[Instrument_Sans] text-sm md:text-base">
+            Distinguished individuals guiding RCIIF's strategic direction and institutional governance.
+          </p>
+        </motion.div>
 
-        <div data-stagger-parent data-reveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {board.map((m) => (
-            <div
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          {board.map((m, i) => (
+            <motion.div
               key={m.name}
-              className="group relative p-6 rounded-2xl text-center transition-all duration-300"
-              style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 20px 50px -20px rgba(184,136,44,0.18)';
-                e.currentTarget.style.borderColor = 'var(--gold-border)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.borderColor = 'var(--border)';
-              }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
+              whileHover={{ y: -6 }}
+              className="group bg-white border border-black/5 hover:border-green-500/40 rounded-2xl overflow-hidden transition-colors text-center hover:shadow-[0_16px_40px_-16px_rgba(34,197,94,0.25)]"
             >
-              <div className="flex justify-center mb-5">
-                <MonogramAvatar initials={m.initials} size="lg" />
+              {/* Monogram avatar */}
+              <div className="aspect-square overflow-hidden bg-green-500/[0.04] flex items-center justify-center">
+                <div className="w-24 h-24 rounded-full flex items-center justify-center bg-green-500/10 border border-green-500/25 group-hover:scale-105 transition-transform duration-500">
+                  <span className="font-[Instrument_Serif] font-bold text-green-600"
+                    style={{ fontSize: '1.8rem', letterSpacing: '0.02em' }}>
+                    {m.initials}
+                  </span>
+                </div>
               </div>
-
-              <span
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '8px',
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  color: m.color === 'gold' ? 'var(--gold)' : 'var(--forest)',
-                  display: 'block',
-                  marginBottom: '8px',
-                }}
-              >
-                {m.role}
-              </span>
-
-              <h3
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontWeight: 400,
-                  fontSize: '17px',
-                  color: 'var(--ink)',
-                  lineHeight: 1.25,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                {m.name}
-              </h3>
-
-              {/* Gold hover bottom border */}
-              <span
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-500"
-                style={{
-                  width: '0%',
-                  background: 'linear-gradient(90deg, transparent, var(--gold), transparent)',
-                }}
-                ref={(el) => { if (el) (el as any)._reset = true; }}
-                onMouseEnter={undefined}
-              />
-              <span className="board-card-rule absolute bottom-3 left-1/2 -translate-x-1/2 h-px w-0 group-hover:w-[60%] transition-all duration-500"
-                style={{ background: 'linear-gradient(90deg, transparent, var(--gold), transparent)' }}
-              />
-            </div>
+              <div className="p-4">
+                <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-1"
+                  style={{ fontSize: '9px', letterSpacing: '0.22em' }}>
+                  {m.role}
+                </span>
+                <h3 className="text-[#0a0a0a] text-sm md:text-base font-bold leading-tight font-[Instrument_Serif]">
+                  {m.name}
+                </h3>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -230,7 +193,7 @@ function BoardGrid() {
   );
 }
 
-/* ── Advisory marquee ── */
+/* ── Advisory marquee — dark ── */
 function AdvisoryMarquee() {
   const advisors = [
     'Dr. Nilesh Karanjekar',
@@ -244,50 +207,28 @@ function AdvisoryMarquee() {
   const doubled = [...advisors, ...advisors];
 
   return (
-    <section className="w-full py-24 md:py-28 px-4 bg-[#0C0B09]">
+    <section className="w-full py-20 md:py-24 px-4 bg-[#0a0a0a]">
       <div className="max-w-[1100px] mx-auto text-center mb-12">
-        <span
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '9px',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--gold)',
-          }}
-        >
+        <span className="text-green-400 font-[Instrument_Sans] uppercase block mb-4"
+          style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
           Advisory Council
         </span>
-        <h2
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-            color: '#F0EBE0',
-            marginTop: '16px',
-            lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-          }}
-        >
+        <h2 className="text-3xl md:text-5xl font-bold font-[Instrument_Serif] text-white leading-[1.05]">
           Advisory Council
         </h2>
+        <div className="w-16 h-0.5 bg-green-500 mx-auto mt-4" />
       </div>
 
-      <div className="overflow-hidden border-y" style={{ borderColor: 'rgba(184,136,44,0.15)' }}>
+      <div className="overflow-hidden border-y border-green-500/15">
         <div className="animate-scroll-left flex whitespace-nowrap py-6">
           {doubled.map((a, i) => (
             <span
               key={i}
-              className="mx-8 inline-flex items-center gap-8"
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontStyle: 'italic',
-                fontWeight: 300,
-                fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
-                color: 'rgba(240,235,224,0.75)',
-              }}
+              className="mx-8 inline-flex items-center gap-8 text-white/75 font-[Instrument_Serif] italic"
+              style={{ fontSize: 'clamp(1.4rem, 3vw, 2.2rem)' }}
             >
               {a}
-              <span style={{ color: 'var(--gold)', fontSize: '1rem' }}>✦</span>
+              <span className="text-green-500 text-base">✦</span>
             </span>
           ))}
         </div>
@@ -296,114 +237,87 @@ function AdvisoryMarquee() {
   );
 }
 
-/* ── Governance values ── */
+/* ── Governance values — white ── */
 function GovernanceValues() {
   return (
-    <section className="w-full py-24 md:py-32 px-4 bg-[var(--bg)]">
+    <section className="w-full py-24 md:py-32 px-4 bg-white">
       <div className="max-w-[1100px] mx-auto">
-        <SectionHeader
-          eyebrow="Our Principles"
-          title={<>Governance <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Values</em></>}
-          description="The principles our board holds itself accountable to."
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
+        >
+          <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-4"
+            style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
+            Our Principles
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a] leading-[1.05]">
+            Governance <em className="italic text-green-600">Values</em>
+          </h2>
+          <div className="w-20 h-0.5 bg-green-500 mx-auto mt-4" />
+        </motion.div>
 
-        <div data-stagger-parent data-reveal className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {VALUES.map((v) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {VALUES.map((v, i) => {
             const Icon = v.Icon;
             return (
-              <SpotlightCard
+              <motion.div
                 key={v.title}
-                className="p-7 rounded-2xl"
-                spotlightColor="rgba(184,136,44,0.18)"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -4 }}
+                className="p-7 rounded-2xl bg-white border border-black/5 hover:border-green-500/40 transition-all hover:shadow-[0_16px_40px_-16px_rgba(34,197,94,0.18)]"
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{
-                    background: 'var(--gold-bg2)',
-                    border: '1px solid var(--gold-border)',
-                  }}
-                >
-                  <Icon size={20} style={{ color: 'var(--gold)' }} />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-green-500/10 border border-green-500/20">
+                  <Icon size={20} className="text-green-600" />
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontWeight: 400,
-                    fontSize: '22px',
-                    color: 'var(--ink)',
-                    marginBottom: '10px',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
+                <h3 className="font-[Instrument_Serif] font-bold text-[#0a0a0a] mb-2"
+                  style={{ fontSize: '22px', letterSpacing: '-0.01em' }}>
                   {v.title}
                 </h3>
-                <p
-                  style={{
-                    fontFamily: "'Instrument Sans', sans-serif",
-                    fontSize: '13.5px',
-                    lineHeight: 1.75,
-                    color: 'var(--ink-3)',
-                  }}
-                >
+                <p className="font-[Instrument_Sans] text-[#0a0a0a]/60"
+                  style={{ fontSize: '14px', lineHeight: 1.75 }}>
                   {v.desc}
                 </p>
-              </SpotlightCard>
+              </motion.div>
             );
           })}
         </div>
       </div>
-
-      <style>{`
-        [data-stagger-parent] { background: transparent; }
-      `}</style>
     </section>
   );
 }
 
-/* ── Join CTA ── */
+/* ── Join CTA — dark green like ApplyCTASection ── */
 function JoinCTA() {
   return (
-    <section className="w-full py-24 md:py-28 px-4 bg-[var(--surface)]">
-      <div className="max-w-3xl mx-auto text-center">
-        <span
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '9px',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--gold)',
-          }}
-        >
-          Join the Council
-        </span>
-        <h2
-          style={{
-            fontFamily: "'Instrument Serif', serif",
-            fontWeight: 400,
-            fontSize: 'clamp(1.8rem, 4vw, 3rem)',
-            color: 'var(--ink)',
-            margin: '16px 0 16px',
-            lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-          }}
-        >
-          Interested in Joining Our Advisory Council?
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Instrument Sans', sans-serif",
-            fontSize: '15px',
-            lineHeight: 1.75,
-            color: 'var(--ink-3)',
-            maxWidth: '52ch',
-            margin: '0 auto 32px',
-          }}
-        >
-          We welcome experienced entrepreneurs, investors, and academics who share our mission.
-        </p>
-        <a href="mailto:info@rciif.org" className="btn-primary" style={{ padding: '14px 36px' }}>
-          Get in Touch
-        </a>
+    <section className="w-full py-20 md:py-28 px-4 bg-[#0a0a0a]">
+      <div className="container mx-auto max-w-4xl">
+        <div className="relative rounded-3xl overflow-hidden border border-green-500/20 bg-gradient-to-br from-green-950/40 to-black p-10 md:p-14 text-center">
+          <span className="text-green-400 text-xs font-[Instrument_Sans] uppercase tracking-[0.22em]">
+            Join the Council
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[Instrument_Serif] text-white mt-4 mb-4 leading-[1.05]">
+            Interested in Joining Our<br />Advisory Council?
+          </h2>
+          <p className="text-white/60 font-[Instrument_Sans] mb-8 max-w-xl mx-auto text-sm md:text-base">
+            We welcome experienced entrepreneurs, investors, and academics who share our mission.
+          </p>
+          <motion.a
+            href="mailto:info@rciif.org"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-400 text-black font-semibold font-[Instrument_Sans] px-8 py-4 rounded-xl text-base md:text-lg transition-colors group"
+          >
+            Get in Touch
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </motion.a>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-green-900/20 pointer-events-none" />
+        </div>
       </div>
     </section>
   );
@@ -416,10 +330,16 @@ export default function Board() {
       description="Meet the RCIIF board — veteran educators, entrepreneurs, and institutional leaders guiding our governance."
     >
       <BoardHero />
-      <BoardGrid />
-      <AdvisoryMarquee />
-      <GovernanceValues />
-      <JoinCTA />
+      <div className="bg-white force-light-bg [&_section]:!bg-white">
+        <BoardGrid />
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <AdvisoryMarquee />
+        </div>
+        <GovernanceValues />
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <JoinCTA />
+        </div>
+      </div>
     </PageLayout>
   );
 }
