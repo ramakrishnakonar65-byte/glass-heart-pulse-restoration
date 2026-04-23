@@ -56,27 +56,13 @@ function StatCell({ s, i }: { s: typeof STATS[number]; i: number }) {
     >
       <span
         ref={ref}
-        style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 300,
-          fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-          color: 'var(--gold)',
-          lineHeight: 1,
-          letterSpacing: '-0.02em',
-        }}
+        className="text-white font-[Instrument_Serif] font-bold leading-none"
+        style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', letterSpacing: '-0.02em' }}
       >
         {s.prefix ?? ''}{val}{s.suffix}
       </span>
-      <span
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '9px',
-          letterSpacing: '0.22em',
-          textTransform: 'uppercase',
-          color: 'rgba(240,235,224,0.55)',
-          marginTop: '14px',
-        }}
-      >
+      <span className="text-green-400 mt-4 font-[Instrument_Sans] uppercase"
+        style={{ fontSize: '10px', letterSpacing: '0.22em' }}>
         {s.label}
       </span>
     </motion.div>
@@ -115,12 +101,11 @@ const INVESTOR_SERVICES = [
   { Icon: CheckSquare, title: 'Investment Readiness',      desc: 'Startup diligence check.' },
 ];
 
-/* ── Persona section ── */
+/* ── Persona section (white bg / dark bg variants — both with green accents) ── */
 interface PersonaProps {
-  variant: 'parchment' | 'dark';
+  variant: 'light' | 'dark';
   align: 'left' | 'right';
   eyebrow: string;
-  eyebrowColor: 'gold' | 'forest';
   title: React.ReactNode;
   description: string;
   ctaText: string;
@@ -128,7 +113,7 @@ interface PersonaProps {
   services: { Icon: any; title: string; desc: string }[];
 }
 
-function PersonaSection({ variant, align, eyebrow, eyebrowColor, title, description, ctaText, ctaHref, services }: PersonaProps) {
+function PersonaSection({ variant, align, eyebrow, title, description, ctaText, ctaHref, services }: PersonaProps) {
   const isDark = variant === 'dark';
   const isLeftText = align === 'left';
   const xOffset = isLeftText ? -40 : 40;
@@ -141,65 +126,32 @@ function PersonaSection({ variant, align, eyebrow, eyebrowColor, title, descript
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col justify-center"
     >
-      <span
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '9px',
-          letterSpacing: '0.22em',
-          textTransform: 'uppercase',
-          color: eyebrowColor === 'gold' ? 'var(--gold)' : '#5fb775',
-          display: 'flex', alignItems: 'center', gap: '12px',
-          marginBottom: '20px',
-        }}
-      >
+      <span className="text-green-500 font-[Instrument_Sans] uppercase mb-5 inline-flex items-center gap-3"
+        style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
         {eyebrow}
-        <span style={{
-          display: 'inline-block', height: '1px', width: '48px',
-          background: eyebrowColor === 'gold'
-            ? 'linear-gradient(90deg, var(--gold), transparent)'
-            : 'linear-gradient(90deg, #5fb775, transparent)',
-        }} />
+        <span className="inline-block h-px w-12 bg-gradient-to-r from-green-500 to-transparent" />
       </span>
       <h2
+        className={`font-[Instrument_Serif] font-bold mb-5 ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}
         style={{
-          fontFamily: "'Instrument Serif', serif",
-          fontWeight: 400,
           fontSize: 'clamp(2rem, 4vw, 3.5rem)',
           lineHeight: 1.05,
           letterSpacing: '-0.02em',
-          color: isDark ? '#F0EBE0' : 'var(--ink)',
-          marginBottom: '20px',
         }}
       >
         {title}
       </h2>
-      <p
-        style={{
-          fontFamily: "'Instrument Sans', sans-serif",
-          fontSize: '15px',
-          lineHeight: 1.75,
-          color: isDark ? 'rgba(240,235,224,0.6)' : 'var(--ink-3)',
-          marginBottom: '28px',
-          maxWidth: '480px',
-        }}
-      >
+      <p className={`font-[Instrument_Sans] mb-7 max-w-md ${isDark ? 'text-white/60' : 'text-[#0a0a0a]/60'}`}
+        style={{ fontSize: '15px', lineHeight: 1.75 }}>
         {description}
       </p>
       <a
         href={ctaHref}
-        className="inline-flex items-center gap-2 group"
-        style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '11px',
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: eyebrowColor === 'gold' ? 'var(--gold)' : '#5fb775',
-          textDecoration: 'none',
-          width: 'fit-content',
-        }}
+        className="inline-flex items-center gap-2 group text-green-500 hover:text-green-400 font-[Instrument_Sans] font-semibold transition-colors"
+        style={{ fontSize: '14px', textDecoration: 'none', width: 'fit-content' }}
       >
         {ctaText}
-        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
       </a>
     </motion.div>
   );
@@ -211,52 +163,23 @@ function PersonaSection({ variant, align, eyebrow, eyebrowColor, title, descript
         return (
           <div
             key={s.title}
-            className="card-spotlight p-5 rounded-xl transition-all duration-300"
-            style={{
-              background: isDark ? 'rgba(255,255,255,0.04)' : 'var(--bg)',
-              border: isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid var(--border)',
-              boxShadow: isDark
-                ? '0 1px 0 rgba(255,255,255,0.03) inset'
-                : '0 1px 2px rgba(12,11,9,0.04), 0 8px 24px -12px rgba(12,11,9,0.06)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.borderColor = isDark ? 'rgba(95,183,117,0.3)' : 'var(--gold-border)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.borderColor = isDark ? 'rgba(255,255,255,0.08)' : 'var(--border)';
-            }}
+            className={`p-5 rounded-2xl transition-all duration-300 ${
+              isDark
+                ? 'bg-white/[0.04] border border-white/10 hover:border-green-500/40 hover:bg-white/[0.06]'
+                : 'bg-white border border-black/5 hover:border-green-500/40 hover:shadow-[0_12px_32px_-12px_rgba(34,197,94,0.18)]'
+            }`}
           >
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
-              style={{
-                background: isDark ? 'rgba(95,183,117,0.1)' : 'var(--gold-bg2)',
-                border: isDark ? '1px solid rgba(95,183,117,0.2)' : '1px solid var(--gold-border)',
-              }}
-            >
-              <Icon size={18} style={{ color: isDark ? '#5fb775' : 'var(--gold)' }} />
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
+              isDark ? 'bg-green-500/10 border border-green-500/25' : 'bg-green-500/10 border border-green-500/20'
+            }`}>
+              <Icon size={18} className={isDark ? 'text-green-400' : 'text-green-600'} />
             </div>
-            <h3
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 500,
-                fontSize: '14px',
-                color: isDark ? '#F0EBE0' : 'var(--ink)',
-                marginBottom: '4px',
-                lineHeight: 1.3,
-              }}
-            >
+            <h3 className={`font-[Instrument_Sans] font-semibold mb-1 ${isDark ? 'text-white' : 'text-[#0a0a0a]'}`}
+              style={{ fontSize: '14px', lineHeight: 1.3 }}>
               {s.title}
             </h3>
-            <p
-              style={{
-                fontFamily: "'Instrument Sans', sans-serif",
-                fontSize: '12px',
-                color: isDark ? 'rgba(240,235,224,0.5)' : 'var(--ink-3)',
-                lineHeight: 1.6,
-              }}
-            >
+            <p className={`font-[Instrument_Sans] ${isDark ? 'text-white/55' : 'text-[#0a0a0a]/55'}`}
+              style={{ fontSize: '12.5px', lineHeight: 1.6 }}>
               {s.desc}
             </p>
           </div>
@@ -267,8 +190,7 @@ function PersonaSection({ variant, align, eyebrow, eyebrowColor, title, descript
 
   return (
     <section
-      className="w-full py-24 md:py-32 px-4"
-      style={{ background: isDark ? '#0C0B09' : 'var(--bg)' }}
+      className={`w-full py-24 md:py-32 px-4 ${isDark ? 'bg-[#0a0a0a]' : 'bg-white'}`}
     >
       <div className="max-w-[1200px] mx-auto">
         <div
@@ -276,8 +198,8 @@ function PersonaSection({ variant, align, eyebrow, eyebrowColor, title, descript
           style={{
             width: '120px',
             background: isDark
-              ? 'linear-gradient(90deg, transparent, rgba(95,183,117,0.4), transparent)'
-              : 'linear-gradient(90deg, transparent, var(--gold), transparent)',
+              ? 'linear-gradient(90deg, transparent, rgba(34,197,94,0.5), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(34,197,94,0.5), transparent)',
           }}
         />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
@@ -304,7 +226,7 @@ function EcosystemCTA() {
           <span className="text-green-400 text-xs font-[Instrument_Sans] uppercase tracking-[0.22em]">
             Join the Ecosystem
           </span>
-          <h2 className="text-3xl md:text-5xl font-[Instrument_Serif] text-white mt-4 mb-5 leading-[1.05]">
+          <h2 className="text-3xl md:text-5xl font-bold font-[Instrument_Serif] text-white mt-4 mb-5 leading-[1.05]">
             Ready to Join the Ecosystem?
           </h2>
           <p className="text-white/60 font-[Instrument_Sans] mb-8 max-w-xl mx-auto text-sm md:text-base">
@@ -344,7 +266,7 @@ export default function Ecosystem() {
       title="Ecosystem"
       description="RCIIF's full-stack startup ecosystem — services for startups, institutions, and investors."
     >
-      {/* 1 — Animated shader hero */}
+      {/* 1 — Animated shader hero (dark, green accents) */}
       <Hero
         trustBadge={{ icon: '✦', text: 'Full-Stack Startup Ecosystem · Kharghar, Navi Mumbai' }}
         headline={{ line1: 'Everything Under', line2: 'One Roof' }}
@@ -361,68 +283,73 @@ export default function Ecosystem() {
         }}
       />
 
-      {/* 2 — Stats strip */}
-      <section className="w-full py-20 md:py-24 px-4 bg-[#0C0B09]">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-0 relative">
-          {STATS.map((s, i) => (
-            <div key={s.label} className="relative">
-              <StatCell s={s} i={i} />
-              {i < STATS.length - 1 && (
-                <div
-                  className="hidden lg:block absolute top-1/2 right-0 -translate-y-1/2"
-                  style={{
-                    width: '1px',
-                    height: '60%',
-                    background: 'linear-gradient(180deg, transparent, rgba(184,136,44,0.25), transparent)',
-                  }}
-                />
-              )}
+      <div className="bg-white force-light-bg [&_section]:!bg-white">
+        {/* 2 — Stats strip (force dark) */}
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <section className="w-full py-20 md:py-24 px-4 bg-[#0a0a0a] border-y border-white/10">
+            <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-0 relative">
+              {STATS.map((s, i) => (
+                <div key={s.label} className="relative">
+                  <StatCell s={s} i={i} />
+                  {i < STATS.length - 1 && (
+                    <div
+                      className="hidden lg:block absolute top-1/2 right-0 -translate-y-1/2"
+                      style={{
+                        width: '1px',
+                        height: '60%',
+                        background: 'linear-gradient(180deg, transparent, rgba(34,197,94,0.3), transparent)',
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          </section>
         </div>
-      </section>
 
-      {/* 3a — For Startups */}
-      <PersonaSection
-        variant="parchment"
-        align="left"
-        eyebrow="For Startups"
-        eyebrowColor="gold"
-        title={<>Everything You Need <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>to Build</em></>}
-        description="From day-one incorporation to series-A readiness — every service a founder needs, under one roof, free for cohort startups."
-        ctaText="Apply to Maverick Pont →"
-        ctaHref="/maverick/apply"
-        services={STARTUP_SERVICES}
-      />
+        {/* 3a — For Startups (white) */}
+        <PersonaSection
+          variant="light"
+          align="left"
+          eyebrow="For Startups"
+          title={<>Everything You Need <em className="italic text-green-600">to Build</em></>}
+          description="From day-one incorporation to series-A readiness — every service a founder needs, under one roof, free for cohort startups."
+          ctaText="Apply to Maverick Pont →"
+          ctaHref="/maverick/apply"
+          services={STARTUP_SERVICES}
+        />
 
-      {/* 3b — For Institutions (dark, reversed) */}
-      <PersonaSection
-        variant="dark"
-        align="right"
-        eyebrow="For Institutions"
-        eyebrowColor="forest"
-        title={<>Bridge <em style={{ color: '#5fb775', fontStyle: 'italic' }}>Academia</em> & Industry</>}
-        description="We partner with universities, schools, and training institutes to build innovation curricula, host hackathons, and connect students to live startup challenges."
-        ctaText="Partner with Us →"
-        ctaHref="/contact/partner"
-        services={INSTITUTION_SERVICES}
-      />
+        {/* 3b — For Institutions (dark, reversed) */}
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <PersonaSection
+            variant="dark"
+            align="right"
+            eyebrow="For Institutions"
+            title={<>Bridge <em className="italic text-green-400">Academia</em> & Industry</>}
+            description="We partner with universities, schools, and training institutes to build innovation curricula, host hackathons, and connect students to live startup challenges."
+            ctaText="Partner with Us →"
+            ctaHref="/contact/partner"
+            services={INSTITUTION_SERVICES}
+          />
+        </div>
 
-      {/* 3c — For Investors */}
-      <PersonaSection
-        variant="parchment"
-        align="left"
-        eyebrow="For Investors"
-        eyebrowColor="gold"
-        title={<>Curated Dealflow, <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>De-risked</em></>}
-        description="Access vetted startups, registered-valuer reports, and structured investment instruments — backed by a 100-year institutional legacy."
-        ctaText="Become an Investment Partner →"
-        ctaHref="/contact/partner"
-        services={INVESTOR_SERVICES}
-      />
+        {/* 3c — For Investors (white) */}
+        <PersonaSection
+          variant="light"
+          align="left"
+          eyebrow="For Investors"
+          title={<>Curated Dealflow, <em className="italic text-green-600">De-risked</em></>}
+          description="Access vetted startups, registered-valuer reports, and structured investment instruments — backed by a 100-year institutional legacy."
+          ctaText="Become an Investment Partner →"
+          ctaHref="/contact/partner"
+          services={INVESTOR_SERVICES}
+        />
 
-      {/* 4 — CTA */}
-      <EcosystemCTA />
+        {/* 4 — CTA (dark) */}
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <EcosystemCTA />
+        </div>
+      </div>
     </PageLayout>
   );
 }
