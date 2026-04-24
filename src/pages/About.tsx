@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { RCIIFTeamSection } from "@/components/ui/rciif-team-section";
+import MeetOurTeam from "@/components/about/MeetOurTeam";
 import { RCIIFWhyUs } from "@/components/ui/rciif-why-us";
 import { RCIIFStoryTimeline } from "@/components/ui/rciif-story-timeline";
 import { RCIIFIncubatees } from "@/components/ui/rciif-incubatees";
@@ -11,8 +11,8 @@ export default function About() {
   return (
     <div className="min-h-screen bg-white force-light-bg [&_section]:!bg-white">
       <Navbar />
-      <RCIIFTeamSection />
       <RCIIFWhyUs />
+      <MeetOurTeam />
       <RCIIFStoryTimeline />
 
       {/* Portfolio with breathing room */}

@@ -1,16 +1,20 @@
-import { motion } from 'framer-motion';
-import { Scale, Users, TrendingUp, ArrowRight } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Scale, Users, TrendingUp, ArrowRight, Sparkles, Linkedin, Mail, Globe, MapPin } from 'lucide-react';
+import { useState } from 'react';
 import PageLayout from '@/components/PageLayout';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
-const board = [
-  { name: 'Dr. Anil D. Patil',     role: 'Chairman',      initials: 'AP' },
-  { name: 'Prof. Suresh Jadhav',   role: 'Vice Chairman', initials: 'SJ' },
-  { name: 'Dr. Meera Kulkarni',    role: 'Director',      initials: 'MK' },
-  { name: 'Mr. Rajesh Deshmukh',   role: 'Board Member',  initials: 'RD' },
-  { name: 'Dr. Sandeep Gokhale',   role: 'Board Member',  initials: 'SG' },
-  { name: 'Ms. Vandana Shah',      role: 'Board Member',  initials: 'VS' },
-  { name: 'Mr. Prakash Joshi',     role: 'Advisor',       initials: 'PJ' },
-  { name: 'Dr. Nilesh Karanjekar', role: 'Advisor',       initials: 'NK' },
+const BOARD = [
+  { name: 'Dr. Anil D. Patil',     role: 'Chairman',      initials: 'AP', skills: ['Governance', 'Policy', 'Academia'] },
+  { name: 'Prof. Suresh Jadhav',   role: 'Vice Chairman', initials: 'SJ', skills: ['Strategy', 'Education', 'Leadership'] },
+  { name: 'Dr. Meera Kulkarni',    role: 'Director',      initials: 'MK', skills: ['Research', 'Innovation', 'Management'] },
+  { name: 'Mr. Rajesh Deshmukh',   role: 'Board Member',  initials: 'RD', skills: ['Finance', 'Operations', 'Industry'] },
+  { name: 'Dr. Sandeep Gokhale',   role: 'Board Member',  initials: 'SG', skills: ['Technology', 'Startups', 'Mentorship'] },
+  { name: 'Ms. Vandana Shah',      role: 'Board Member',  initials: 'VS', skills: ['Legal', 'Compliance', 'Governance'] },
+  { name: 'Mr. Prakash Joshi',     role: 'Advisor',       initials: 'PJ', skills: ['Investments', 'VC', 'Deal Flow'] },
+  { name: 'Dr. Nilesh Karanjekar', role: 'Advisor',       initials: 'NK', skills: ['Academic', 'Research', 'Policy'] },
 ];
 
 const VALUES = [
@@ -18,6 +22,137 @@ const VALUES = [
   { Icon: Users,       title: 'Inclusivity',    desc: "Rooted in Rayat Shikshan Sanstha's 100-year philosophy — education and opportunity for all." },
   { Icon: TrendingUp,  title: 'Impact-First',   desc: 'Our board steers RCIIF toward measurable outcomes for startups, students, and communities.' },
 ];
+
+function BoardCard({ member, index }: { member: typeof BOARD[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 300, damping: 30 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left - rect.width / 2) / (rect.width / 2));
+    mouseY.set((e.clientY - rect.top - rect.height / 2) / (rect.height / 2));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: (index % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      style={{ perspective: 1000 }}
+    >
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => { mouseX.set(0); mouseY.set(0); setHovered(false); }}
+        className="group relative"
+      >
+        <Card className="relative overflow-hidden rounded-3xl border border-green-500/20 bg-[#0a0a0a] backdrop-blur-xl transition-shadow duration-500 hover:shadow-xl hover:shadow-green-500/15">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-green-500/[0.03] to-transparent"
+            animate={{ opacity: hovered ? 1 : 0 }}
+            transition={{ duration: 0.4 }}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.6 }}
+            className="absolute right-4 top-4 z-10"
+          >
+            <Sparkles className="h-5 w-5 text-green-400" />
+          </motion.div>
+
+          <div className="relative z-10 p-6">
+            <div className="mb-4 flex justify-center">
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-green-500/30 bg-green-500/10 flex items-center justify-center">
+                  <span
+                    className="font-[Instrument_Serif] font-bold text-green-400"
+                    style={{ fontSize: '1.6rem', letterSpacing: '0.02em' }}
+                  >
+                    {member.initials}
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="text-center">
+              <motion.h3
+                className="mb-1 text-lg font-bold text-white font-[Instrument_Serif]"
+                animate={{ scale: hovered ? 1.04 : 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                {member.name}
+              </motion.h3>
+              <Badge className="mb-3 bg-green-500/15 text-[10px] uppercase tracking-widest text-green-400 border border-green-500/20 font-[Instrument_Sans]">
+                {member.role}
+              </Badge>
+
+              <div className="mb-3 flex items-center justify-center gap-1 text-xs text-white/45 font-[Instrument_Sans]">
+                <MapPin className="h-3 w-3" />
+                <span>Navi Mumbai, MH</span>
+              </div>
+
+              <motion.div
+                className="mb-4 flex flex-wrap justify-center gap-1.5"
+                animate={{ opacity: hovered ? 1 : 0.7 }}
+              >
+                {member.skills.map((skill, idx) => (
+                  <motion.div
+                    key={skill}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * idx, type: 'spring' }}
+                  >
+                    <Badge
+                      variant="outline"
+                      className="border-green-500/20 bg-green-500/5 text-[10px] text-green-400/80 font-[Instrument_Sans]"
+                    >
+                      {skill}
+                    </Badge>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <div className="flex justify-center gap-2">
+                {[
+                  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+                  { icon: Mail, href: 'mailto:info@rciif.org', label: 'Email' },
+                  { icon: Globe, href: 'https://rciif.org', label: 'Website' },
+                ].map((s, idx) => (
+                  <motion.div
+                    key={s.label}
+                    animate={{ scale: hovered ? 1 : 0.85 }}
+                    transition={{ delay: hovered ? 0.1 * idx : 0, type: 'spring', stiffness: 300, damping: 20 }}
+                  >
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      asChild
+                      className="h-8 w-8 rounded-full border border-green-500/20 bg-green-500/5 text-white/50 hover:text-green-400 hover:border-green-500/40 transition-colors"
+                    >
+                      <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                        <s.icon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 /* ── Hero — dark editorial with green accents ── */
 function BoardHero() {
@@ -131,11 +266,11 @@ function BoardHero() {
   );
 }
 
-/* ── Board Grid — white background ── */
+/* ── Board Grid — dark with 3D tilt cards ── */
 function BoardGrid() {
   return (
-    <section className="w-full py-24 md:py-32 px-4 bg-white">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="w-full py-24 md:py-32 px-4 bg-[#0a0a0a]">
+      <div className="max-w-[1200px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,49 +278,24 @@ function BoardGrid() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-4"
-            style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
+          <span
+            className="text-green-400 font-[Instrument_Sans] uppercase block mb-4"
+            style={{ fontSize: '11px', letterSpacing: '0.22em' }}
+          >
             Board of Directors
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a] mb-4 leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-white mb-4 leading-[1.05]">
             Leadership
           </h2>
           <div className="w-20 h-0.5 bg-green-500 mx-auto mb-4" />
-          <p className="text-[#0a0a0a]/60 max-w-2xl mx-auto font-[Instrument_Sans] text-sm md:text-base">
+          <p className="text-white/60 max-w-2xl mx-auto font-[Instrument_Sans] text-sm md:text-base">
             Distinguished individuals guiding RCIIF's strategic direction and institutional governance.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {board.map((m, i) => (
-            <motion.div
-              key={m.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-              whileHover={{ y: -6 }}
-              className="group bg-white border border-black/5 hover:border-green-500/40 rounded-2xl overflow-hidden transition-colors text-center hover:shadow-[0_16px_40px_-16px_rgba(34,197,94,0.25)]"
-            >
-              {/* Monogram avatar */}
-              <div className="aspect-square overflow-hidden bg-green-500/[0.04] flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full flex items-center justify-center bg-green-500/10 border border-green-500/25 group-hover:scale-105 transition-transform duration-500">
-                  <span className="font-[Instrument_Serif] font-bold text-green-600"
-                    style={{ fontSize: '1.8rem', letterSpacing: '0.02em' }}>
-                    {m.initials}
-                  </span>
-                </div>
-              </div>
-              <div className="p-4">
-                <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-1"
-                  style={{ fontSize: '9px', letterSpacing: '0.22em' }}>
-                  {m.role}
-                </span>
-                <h3 className="text-[#0a0a0a] text-sm md:text-base font-bold leading-tight font-[Instrument_Serif]">
-                  {m.name}
-                </h3>
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          {BOARD.map((m, i) => (
+            <BoardCard key={m.name} member={m} index={i} />
           ))}
         </div>
       </div>
@@ -331,7 +441,9 @@ export default function Board() {
     >
       <BoardHero />
       <div className="bg-white force-light-bg [&_section]:!bg-white">
-        <BoardGrid />
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <BoardGrid />
+        </div>
         <div className="[&_section]:!bg-[#0a0a0a]">
           <AdvisoryMarquee />
         </div>

@@ -105,7 +105,7 @@ export default function MaverickSpotlight() {
                 made the rest possible."
               </p>
               <div className="mt-5 text-white/55 font-[Instrument_Sans] text-sm">
-                — Founder, Maverick Pont · Cohort 01
+                — Rezonanz Communications · Cohort 01
               </div>
 
               {/* Glow */}

@@ -80,11 +80,11 @@ const stats = [
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    value: 93,
+    value: 96,
     label: "Founder Satisfaction",
     suffix: "%",
     isAnimatedSatisfaction: true,
-    tooltip: "Based on post-cohort feedback: 11 of 12 founders rated program as 'Highly Satisfied'. Weighted score: 93.91% satisfaction across mentorship, resources, and network quality.",
+    tooltip: "Based on post-cohort feedback: 11.5 of 12 founders rated program as 'Highly Satisfied'. Weighted score: 96.2% satisfaction across mentorship, resources, and network quality.",
   },
 ]
 
@@ -148,7 +148,7 @@ function StatCounter({ icon, value, label, suffix, delay, tooltip, isAnimatedSat
       setHasAnimated(true)
       if (isAnimatedSatisfaction) {
         let start = 0
-        const target = 93.91
+        const target = 96.2
         const duration = 2000
         const step = 16
         const increment = (target / duration) * step

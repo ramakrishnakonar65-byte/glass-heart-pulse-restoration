@@ -33,6 +33,7 @@ function StatCounter({
   label,
   active,
   delay,
+  index,
 }: {
   end: number;
   prefix?: string;
@@ -40,14 +41,17 @@ function StatCounter({
   label: string;
   active: boolean;
   delay: number;
+  index: number;
 }) {
   const value = useCounter(end, active);
+  const accent = index % 2 === 0 ? "#22c55e" : "#0a0a0a";
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={active ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className="text-left"
+      className="text-left rounded-xl bg-white/60"
+      style={{ borderTop: `2px solid ${accent}`, padding: "24px 20px" }}
     >
       <div className="relative inline-block">
         {active && (
@@ -153,9 +157,9 @@ export default function IdentitySection() {
               <div className="absolute -top-4 left-8 px-3 py-1 rounded-full bg-[#0a0a0a] text-white text-xs font-[Instrument_Sans] tracking-widest uppercase">
                 In Numbers
               </div>
-              <div className="grid grid-cols-2 gap-8 mt-4">
+              <div className="grid grid-cols-2 gap-4 mt-4">
                 {STATS.map((s, i) => (
-                  <StatCounter key={s.label} {...s} active={inView} delay={i * 0.15} />
+                  <StatCounter key={s.label} {...s} active={inView} delay={i * 0.15} index={i} />
                 ))}
               </div>
               <div className="mt-10 pt-6 border-t border-gray-100 text-[#0a0a0a]/55 font-[Instrument_Sans] text-xs tracking-widest uppercase">

@@ -139,83 +139,8 @@ export default function HeroOverlay() {
         playsInline
       />
 
-      {/* Navbar */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-16 pt-6">
-        <nav className="liquid-glass rounded-xl px-4 py-2 flex items-center justify-between">
-          <span className="text-2xl font-semibold tracking-tight text-white">VEX</span>
-
-          <div className="hidden md:flex items-center gap-8">
-            {['Story', 'Investing', 'Building', 'Advisory'].map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="text-sm text-white/70 hover:text-gray-300 transition-colors"
-              >
-                {link}
-              </a>
-            ))}
-          </div>
-
-          <button className="bg-white text-black px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
-            Start a Chat
-          </button>
-        </nav>
-      </div>
-
-      {/* Hero Content */}
+      {/* Hero Content — only scroll indicator remains */}
       <div className="relative z-10 px-6 md:px-12 lg:px-16 flex-1 flex flex-col justify-end pb-12 lg:pb-16">
-        <div className="lg:grid lg:grid-cols-2 lg:items-end">
-          {/* Left Column */}
-          <div>
-            <AnimatedHeading text={"Shaping tomorrow\nwith vision and action."} />
-
-            {/* Animated gold rule under headline */}
-            <FadeIn delay={1000} duration={900}>
-              <div
-                className="mb-5"
-                style={{
-                  width: '80px',
-                  height: '1px',
-                  background: 'linear-gradient(90deg, #B8882C, rgba(184,136,44,0.2))',
-                  transition: 'width 900ms cubic-bezier(0.16,1,0.3,1)',
-                }}
-              />
-            </FadeIn>
-
-            <FadeIn delay={800} duration={1000}>
-              <p data-reveal data-delay="300" className="text-base md:text-lg text-gray-300 mb-5">
-                We back visionaries and craft ventures that define what comes next.
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={1200} duration={1000}>
-              <div data-reveal data-delay="400" className="flex flex-wrap gap-4">
-                <MagneticButton>
-                  <button className="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    Start a Chat
-                  </button>
-                </MagneticButton>
-                <MagneticButton>
-                  <button className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-colors">
-                    Explore Now
-                  </button>
-                </MagneticButton>
-              </div>
-            </FadeIn>
-          </div>
-
-          {/* Right Column */}
-          <div className="flex items-end justify-start lg:justify-end mt-8 lg:mt-0">
-            <FadeIn delay={1400} duration={1000}>
-              <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
-                <span className="text-lg md:text-xl lg:text-2xl font-light text-white">
-                  Investing. Building. Advisory.
-                </span>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-
         {/* Scroll indicator */}
         <FadeIn delay={1800} duration={900}>
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none">

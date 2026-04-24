@@ -123,13 +123,13 @@ function ZigzagLine({ count, progress }: { count: number; progress: any }) {
 function TimelineDot({ milestone, index, progress, count }: {
   milestone: typeof milestones[0]; index: number; progress: any; count: number
 }) {
-  // Each dot fills when overall progress passes its threshold
-  const threshold = (index + 0.5) / count
+  // Dot activates exactly when line reaches it
+  const threshold = count > 1 ? index / (count - 1) : 0
   const fill = useTransform(progress, (v: number) => v >= threshold ? 1 : 0)
   const bg = useTransform(fill, [0, 1], ["#0a0a0a", "#22c55e"])
   const textColor = useTransform(fill, [0, 1], ["#22c55e", "#0a0a0a"])
   const pts = dotPositions(count)
-  const offsetX = pts[index].x - 32 // center column is at x=32
+  const offsetX = pts[index].x - 32
 
   return (
     <motion.div
@@ -153,7 +153,7 @@ function TimelineRow({ milestone, index, progress, count }: {
   milestone: typeof milestones[0]; index: number; progress: any; count: number
 }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.35, margin: "0px 0px -80px 0px" })
+  const isInView = useInView(ref, { once: false, amount: 0.5, margin: "0px 0px -120px 0px" })
   const isLeft = milestone.side === "left"
 
   return (
@@ -163,7 +163,7 @@ function TimelineRow({ milestone, index, progress, count }: {
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
             className="w-full max-w-sm"
           >
             <MilestoneCard milestone={milestone} />
@@ -180,7 +180,7 @@ function TimelineRow({ milestone, index, progress, count }: {
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
             className="w-full max-w-sm"
           >
             <MilestoneCard milestone={milestone} />
