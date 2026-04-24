@@ -266,11 +266,11 @@ function BoardHero() {
   );
 }
 
-/* ── Board Grid — white background ── */
+/* ── Board Grid — dark with 3D tilt cards ── */
 function BoardGrid() {
   return (
-    <section className="w-full py-24 md:py-32 px-4 bg-white">
-      <div className="max-w-[1100px] mx-auto">
+    <section className="w-full py-24 md:py-32 px-4 bg-[#0a0a0a]">
+      <div className="max-w-[1200px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -278,49 +278,24 @@ function BoardGrid() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-4"
-            style={{ fontSize: '11px', letterSpacing: '0.22em' }}>
+          <span
+            className="text-green-400 font-[Instrument_Sans] uppercase block mb-4"
+            style={{ fontSize: '11px', letterSpacing: '0.22em' }}
+          >
             Board of Directors
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-[#0a0a0a] mb-4 leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-bold font-[Instrument_Serif] text-white mb-4 leading-[1.05]">
             Leadership
           </h2>
           <div className="w-20 h-0.5 bg-green-500 mx-auto mb-4" />
-          <p className="text-[#0a0a0a]/60 max-w-2xl mx-auto font-[Instrument_Sans] text-sm md:text-base">
+          <p className="text-white/60 max-w-2xl mx-auto font-[Instrument_Sans] text-sm md:text-base">
             Distinguished individuals guiding RCIIF's strategic direction and institutional governance.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {board.map((m, i) => (
-            <motion.div
-              key={m.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-              whileHover={{ y: -6 }}
-              className="group bg-white border border-black/5 hover:border-green-500/40 rounded-2xl overflow-hidden transition-colors text-center hover:shadow-[0_16px_40px_-16px_rgba(34,197,94,0.25)]"
-            >
-              {/* Monogram avatar */}
-              <div className="aspect-square overflow-hidden bg-green-500/[0.04] flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full flex items-center justify-center bg-green-500/10 border border-green-500/25 group-hover:scale-105 transition-transform duration-500">
-                  <span className="font-[Instrument_Serif] font-bold text-green-600"
-                    style={{ fontSize: '1.8rem', letterSpacing: '0.02em' }}>
-                    {m.initials}
-                  </span>
-                </div>
-              </div>
-              <div className="p-4">
-                <span className="text-green-600 font-[Instrument_Sans] uppercase block mb-1"
-                  style={{ fontSize: '9px', letterSpacing: '0.22em' }}>
-                  {m.role}
-                </span>
-                <h3 className="text-[#0a0a0a] text-sm md:text-base font-bold leading-tight font-[Instrument_Serif]">
-                  {m.name}
-                </h3>
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          {BOARD.map((m, i) => (
+            <BoardCard key={m.name} member={m} index={i} />
           ))}
         </div>
       </div>
