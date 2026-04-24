@@ -72,24 +72,43 @@ export default function Navbar() {
     >
       <div className="max-w-[1100px] mx-auto px-6 md:px-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group py-3 no-underline">
+        <Link to="/" className="flex items-center gap-3 group py-3 no-underline">
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center border transition-colors"
-            style={{ background: 'var(--gold-bg2)', borderColor: 'var(--gold-border)' }}
-          >
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem', color: 'var(--gold)' }}>R</span>
-          </div>
-          <span
+            className="w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:scale-105"
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 500,
-              fontSize: '15px',
-              color: showTransparent ? '#FDFBF7' : 'var(--ink)',
-              textDecoration: 'none',
+              background: 'linear-gradient(135deg, var(--gold-bg2), var(--gold-bg))',
+              borderColor: 'var(--gold-border)',
+              boxShadow: '0 4px 12px -4px rgba(184,136,44,0.25)',
             }}
           >
-            RCIIF
-          </span>
+            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.15rem', color: 'var(--gold)', fontWeight: 500 }}>R</span>
+          </div>
+          <div className="flex flex-col leading-none">
+            <span
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 600,
+                fontSize: '16px',
+                color: showTransparent ? '#FDFBF7' : 'var(--ink)',
+                textDecoration: 'none',
+                letterSpacing: '0.02em',
+              }}
+            >
+              RCIIF
+            </span>
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '7px',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: showTransparent ? 'rgba(253,251,247,0.55)' : 'var(--ink-4)',
+                marginTop: '3px',
+              }}
+            >
+              Est. 2022
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Links */}
