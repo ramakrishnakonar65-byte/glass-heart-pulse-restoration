@@ -26,9 +26,12 @@ export function RCIIFBoard() {
           <span className="text-green-400 text-xs tracking-widest uppercase mb-3 block" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
             Governance
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif" }}>
-            Board Members
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3" style={{ fontFamily: "'Instrument Serif', serif" }}>
+            Board of Directors
           </h2>
+          <p className="text-green-400 italic mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontSize: "20px" }}>
+            Leadership
+          </p>
           <div className="w-20 h-0.5 bg-green-500 mx-auto mb-4" />
           <p className="text-white/60 max-w-2xl mx-auto text-sm md:text-base" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
             Veteran educators, entrepreneurs, and institutional leaders steering RCIIF's
