@@ -50,16 +50,16 @@ export function RCIIFBoard() {
               whileHover={{ y: -6 }}
               className="group bg-white/[0.03] border border-white/10 hover:border-green-500/40 rounded-2xl overflow-hidden transition-colors"
             >
-              <div className="aspect-square overflow-hidden bg-[#0f0f0f]">
-                <img
-                  src={m.image}
-                  alt={m.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+              <div className="aspect-square overflow-hidden bg-gradient-to-br from-green-900/30 via-[#0f0f0f] to-[#0a0a0a] flex items-center justify-center">
+                <div
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border border-green-500/30 bg-green-500/10 text-green-400 group-hover:scale-105 group-hover:border-green-500/60 transition-all duration-500"
+                  style={{ fontFamily: "'Instrument Serif', serif", fontSize: "clamp(22px, 2.6vw, 30px)", letterSpacing: "0.04em" }}
+                >
+                  {m.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
+                </div>
               </div>
-              <div className="p-4 text-center">
-                <h3 className="text-white text-sm md:text-base font-bold leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>
+              <div className="p-4 text-center flex flex-col justify-center" style={{ minHeight: "84px" }}>
+                <h3 className="text-white text-sm font-bold leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>
                   {m.name}
                 </h3>
                 <p className="text-green-400 text-xs mt-1" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
