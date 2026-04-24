@@ -441,7 +441,9 @@ export default function Board() {
     >
       <BoardHero />
       <div className="bg-white force-light-bg [&_section]:!bg-white">
-        <BoardGrid />
+        <div className="[&_section]:!bg-[#0a0a0a]">
+          <BoardGrid />
+        </div>
         <div className="[&_section]:!bg-[#0a0a0a]">
           <AdvisoryMarquee />
         </div>
