@@ -52,15 +52,25 @@ const services = [
 
 function ServiceItem({ icon, secondaryIcon, title, description, variants, delay, revealDelay }: any) {
   return (
-    <motion.div data-reveal data-delay={revealDelay} className="flex flex-col group" variants={variants} transition={{ delay }} whileHover={{ y: -5 }}>
+    <motion.div
+      data-reveal
+      data-delay={revealDelay}
+      className="relative flex flex-col group rounded-2xl border border-white/10 hover:border-green-500/40 bg-white/[0.03] hover:bg-green-500/[0.04] p-6 transition-colors duration-300 overflow-hidden"
+      variants={variants}
+      transition={{ delay }}
+      whileHover={{ y: -5 }}
+    >
       <div className="flex items-center gap-3 mb-3">
-        <motion.div className="text-green-400 bg-green-500/10 p-3 rounded-lg group-hover:bg-green-500/20 relative transition-colors duration-300"
-          whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}>
+        <motion.div
+          className="text-green-400 bg-green-500/10 p-3 rounded-lg group-hover:bg-green-500/20 relative transition-colors duration-300"
+          whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
+        >
           {icon}{secondaryIcon}
         </motion.div>
         <h3 className="text-xl font-[Instrument_Serif] text-white group-hover:text-green-400 transition-colors duration-300">{title}</h3>
       </div>
-      <p className="text-sm text-white/60 leading-relaxed pl-12 font-[Instrument_Sans]">{description}</p>
+      <p className="text-sm text-white/60 leading-relaxed font-[Instrument_Sans]">{description}</p>
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-transparent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
     </motion.div>
   )
 }
