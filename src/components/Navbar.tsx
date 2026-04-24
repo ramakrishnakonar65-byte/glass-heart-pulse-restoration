@@ -72,70 +72,114 @@ export default function Navbar() {
     >
       <div className="max-w-[1100px] mx-auto px-6 md:px-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group py-3 no-underline">
+        <Link to="/" className="flex items-center gap-3 group py-3 no-underline">
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center border transition-colors"
-            style={{ background: 'var(--gold-bg2)', borderColor: 'var(--gold-border)' }}
-          >
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem', color: 'var(--gold)' }}>R</span>
-          </div>
-          <span
+            className="w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:scale-105"
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 500,
-              fontSize: '15px',
-              color: showTransparent ? '#FDFBF7' : 'var(--ink)',
-              textDecoration: 'none',
+              background: 'linear-gradient(135deg, var(--gold-bg2), var(--gold-bg))',
+              borderColor: 'var(--gold-border)',
+              boxShadow: '0 4px 12px -4px rgba(184,136,44,0.25)',
             }}
           >
-            RCIIF
-          </span>
+            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.15rem', color: 'var(--gold)', fontWeight: 500 }}>R</span>
+          </div>
+          <div className="flex flex-col leading-none">
+            <span
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 600,
+                fontSize: '16px',
+                color: showTransparent ? '#FDFBF7' : 'var(--ink)',
+                textDecoration: 'none',
+                letterSpacing: '0.02em',
+              }}
+            >
+              RCIIF
+            </span>
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '7px',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: showTransparent ? 'rgba(253,251,247,0.55)' : 'var(--ink-4)',
+                marginTop: '3px',
+              }}
+            >
+              Est. 2022
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center">
+        <div className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className="relative px-3 py-4 transition-colors no-underline"
+              className="relative px-4 py-5 group transition-colors no-underline"
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '8px',
-                letterSpacing: '0.15em',
+                fontSize: '9px',
+                letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 textDecoration: 'none',
+                fontWeight: 500,
                 color: isActive(link.href)
-                  ? (showTransparent ? '#FDFBF7' : 'var(--ink)')
-                  : (showTransparent ? 'rgba(253,251,247,0.6)' : 'var(--ink-4)'),
+                  ? 'var(--gold)'
+                  : (showTransparent ? 'rgba(253,251,247,0.7)' : 'var(--ink-3)'),
               }}
             >
               {link.label}
+              {/* Hover underline */}
               <span
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-t transition-all duration-200"
+                className="absolute left-1/2 -translate-x-1/2 h-px transition-all duration-300 ease-out group-hover:w-[60%]"
                 style={{
-                  width: isActive(link.href) ? '80%' : '0%',
+                  bottom: '12px',
+                  width: '0%',
                   background: 'var(--gold)',
+                  opacity: 0.5,
                 }}
               />
-              <span
-                aria-hidden
-                className="absolute left-1/2 -translate-x-1/2 rounded-full transition-opacity duration-300"
-                style={{
-                  bottom: '-4px',
-                  width: '4px',
-                  height: '4px',
-                  background: 'var(--gold)',
-                  opacity: isActive(link.href) ? 1 : 0,
-                }}
-              />
+              {/* Active dot */}
+              {isActive(link.href) && (
+                <span
+                  aria-hidden
+                  className="absolute left-1/2 -translate-x-1/2 rounded-full"
+                  style={{
+                    bottom: '8px',
+                    width: '4px',
+                    height: '4px',
+                    background: 'var(--gold)',
+                    boxShadow: '0 0 8px rgba(184,136,44,0.6)',
+                  }}
+                />
+              )}
             </Link>
           ))}
         </div>
 
         {/* CTA */}
-        <Link to="/maverick/apply" className="hidden lg:inline-block btn-primary no-underline" style={{ padding: '10px 22px', fontSize: '9px', textDecoration: 'none' }}>
-          Apply Now
+        <Link
+          to="/maverick/apply"
+          className="hidden lg:inline-flex items-center gap-2 no-underline group"
+          style={{
+            background: 'var(--gold)',
+            color: 'var(--bg)',
+            padding: '11px 22px',
+            borderRadius: '999px',
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: '9px',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            textDecoration: 'none',
+            boxShadow: '0 6px 18px -6px rgba(184,136,44,0.5)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          }}
+        >
+          Apply
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
         </Link>
 
         {/* Mobile Toggle */}
@@ -151,11 +195,13 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div
-          className="lg:hidden absolute top-full left-0 right-0 p-4 border-b"
+          className="lg:hidden absolute top-full left-0 right-0 px-4 py-4 border-b"
           style={{
-            background: 'rgba(253,251,247,0.98)',
-            backdropFilter: 'blur(24px)',
-            borderColor: 'var(--border)',
+            background: 'rgba(12,11,9,0.97)',
+            backdropFilter: 'blur(28px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+            borderColor: 'rgba(184,136,44,0.18)',
+            animation: 'slideDown 0.3s ease-out',
           }}
         >
           {NAV_LINKS.map((link) => (
@@ -163,19 +209,34 @@ export default function Navbar() {
               key={link.href}
               to={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block w-full text-left px-4 py-3 rounded-lg transition-colors no-underline"
+              className="block w-full px-4 py-3 rounded-xl transition-colors no-underline"
               style={{
                 fontFamily: "'Outfit', sans-serif",
-                fontSize: '14px',
+                fontSize: '15px',
                 textDecoration: 'none',
-                color: isActive(link.href) ? 'var(--gold)' : 'var(--ink-3)',
+                color: isActive(link.href) ? 'var(--gold)' : 'rgba(253,251,247,0.7)',
+                background: isActive(link.href) ? 'rgba(184,136,44,0.08)' : 'transparent',
               }}
             >
               {link.label}
             </Link>
           ))}
-          <Link to="/maverick/apply" onClick={() => setMobileOpen(false)} className="btn-primary w-full text-center mt-2 no-underline block" style={{ textDecoration: 'none' }}>
-            Apply Now
+          <Link
+            to="/maverick/apply"
+            onClick={() => setMobileOpen(false)}
+            className="no-underline block text-center mt-3 py-3 rounded-xl"
+            style={{
+              background: 'var(--gold)',
+              color: 'var(--bg)',
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: '10px',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            Apply →
           </Link>
         </div>
       )}
