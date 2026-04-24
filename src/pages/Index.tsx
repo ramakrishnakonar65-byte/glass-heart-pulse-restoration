@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import HeroOverlay from "@/components/HeroOverlay";
 import MarqueeTicker from "@/components/MarqueeTicker";
-import StatsMarquee from "@/components/maverick/StatsMarquee";
 import BuiltForSection from "@/components/maverick/BuiltForSection";
 import TestimonialsSection from "@/components/maverick/TestimonialsSection";
 import IdentitySection from "@/components/home/IdentitySection";
@@ -34,9 +33,6 @@ export default function Index() {
       <MarqueeTicker />
 
       <div className="bg-white force-light-bg [&_section]:!bg-white">
-        {/* 2. Stats marquee */}
-        <StatsMarquee />
-
         {/* 3. Identity */}
         <IdentitySection />
 
