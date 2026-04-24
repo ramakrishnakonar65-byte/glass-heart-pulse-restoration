@@ -444,9 +444,6 @@ export default function Board() {
         <div className="[&_section]:!bg-[#0a0a0a]">
           <BoardGrid />
         </div>
-        <div className="[&_section]:!bg-[#0a0a0a]">
-          <AdvisoryMarquee />
-        </div>
         <GovernanceValues />
         <div className="[&_section]:!bg-[#0a0a0a]">
           <JoinCTA />
