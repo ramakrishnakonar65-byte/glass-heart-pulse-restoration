@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -44,9 +44,24 @@ export default function JourneySection() {
     setActiveStep(next);
     if (!scrollRef.current) return;
     const isDesktop = window.innerWidth >= 1024;
-    const cardW = (isDesktop ? 360 : window.innerWidth * 0.82) + 24;
+    const cardW = (isDesktop ? 380 : window.innerWidth * 0.82) + 24;
     scrollRef.current.scrollTo({ left: next * cardW, behavior: "smooth" });
   }, []);
+
+  const onScroll = useCallback(() => {
+    if (!scrollRef.current) return;
+    const isDesktop = window.innerWidth >= 1024;
+    const cardW = (isDesktop ? 380 : window.innerWidth * 0.82) + 24;
+    const idx = Math.round(scrollRef.current.scrollLeft / cardW);
+    setActiveStep(Math.min(Math.max(idx, 0), steps.length - 1));
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [onScroll]);
 
   return (
     <section className="bg-[#0a0a0a] py-20 md:py-28 overflow-hidden">
@@ -97,17 +112,31 @@ export default function JourneySection() {
               {s.number}
             </div>
 
+            className={`relative flex-shrink-0 snap-start w-[82vw] lg:w-[380px] rounded-3xl border p-8 md:p-10 transition-all duration-500 group ${
+              activeStep === i
+                ? 'border-green-500/60 bg-green-950/20 shadow-[0_0_40px_-12px_rgba(34,197,94,0.35)]'
+                : 'border-white/[0.08] bg-white/[0.02] hover:border-green-500/25 hover:bg-white/[0.04]'
+            }`}
+          >
+            {/* Big watermark number */}
+            <div
+              className="absolute -right-4 -top-4 text-[120px] font-bold leading-none select-none pointer-events-none text-white/[0.05] group-hover:text-green-500/[0.1] transition-colors duration-500"
+              style={{ fontFamily: "'Instrument Serif', serif" }}
+            >
+              {s.number}
+            </div>
+
             <div className="relative z-10">
-              <span className="text-green-400 font-[Instrument_Sans] text-xs tracking-[0.2em] uppercase">
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#4ade80' }}>
                 Step {s.number}
               </span>
-              <h3 className="text-3xl font-bold font-[Instrument_Serif] text-white mt-3 mb-1">
+              <h3 style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 700, fontSize: 'clamp(2.5rem,4vw,3.5rem)', color: 'white', lineHeight: 1.0, marginTop: 12, marginBottom: 4 }}>
                 {s.step}
               </h3>
-              <h4 className="text-lg font-[Instrument_Serif] text-white/70 mb-4">
+              <h4 style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: 18, color: 'rgba(255,255,255,0.55)', marginBottom: 16, lineHeight: 1.3 }}>
                 {s.heading}
               </h4>
-              <p className="text-white/55 font-[Instrument_Sans] text-sm leading-relaxed mb-6">
+              <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.45)', maxWidth: '36ch', marginBottom: 24 }}>
                 {s.description}
               </p>
               <div className="flex items-center gap-2">
