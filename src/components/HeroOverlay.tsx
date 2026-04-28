@@ -42,13 +42,19 @@ function AnimatedHeading({ text, initialDelay = 200, charDelay = 30 }: { text: s
 
   return (
     <h1
-      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4 text-white"
-      style={{ letterSpacing: '-0.04em' }}
+      className="font-normal mb-6 text-white"
+      style={{
+        fontFamily: "'Instrument Serif', serif",
+        fontWeight: 700,
+        fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+        lineHeight: 1.05,
+        letterSpacing: '-0.03em',
+      }}
     >
       {lines.map((line, lineIndex) => {
         const chars = line.split('');
         return (
-          <span key={lineIndex} className="block">
+          <span key={lineIndex} className="block" style={lineIndex === 1 ? { color: '#B8882C', fontStyle: 'italic' } : {}}>
             {chars.map((char, charIndex) => {
               const delay = (lineIndex * line.length * charDelay) + (charIndex * charDelay);
               return (
@@ -145,6 +151,10 @@ export default function HeroOverlay() {
       {/* Hero Content */}
       <div className="relative z-10 px-6 md:px-12 lg:px-16 flex-1 flex flex-col justify-end pb-24 lg:pb-32">
         <div className="max-w-3xl">
+          <FadeIn delay={0} duration={900}>
+            <AnimatedHeading text={"Where Ideas Find\nInfrastructure."} />
+          </FadeIn>
+
           <FadeIn delay={400} duration={900}>
             <p
               className="text-white/85 mb-8 max-w-xl"

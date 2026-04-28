@@ -1,6 +1,6 @@
 "use client"
 import { useRef } from "react"
-import { motion, useScroll, useSpring, useTransform, useInView } from "framer-motion"
+import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 
 const milestones = [
   {
@@ -123,24 +123,24 @@ function ZigzagLine({ count, progress }: { count: number; progress: any }) {
 function TimelineDot({ milestone, index, progress, count }: {
   milestone: typeof milestones[0]; index: number; progress: any; count: number
 }) {
-  // Dot activates exactly when line reaches it
   const threshold = count > 1 ? index / (count - 1) : 0
-  const fill = useTransform(progress, (v: number) => v >= threshold ? 1 : 0)
-  const bg = useTransform(fill, [0, 1], ["#0a0a0a", "#22c55e"])
-  const textColor = useTransform(fill, [0, 1], ["#22c55e", "#0a0a0a"])
+  const fill = useTransform(progress,
+    [Math.max(0, threshold - 0.02), threshold, Math.min(1, threshold + 0.02)],
+    [0, 0, 1]
+  )
+  const bg = useTransform(fill, [0, 1], ['rgba(10,10,10,1)', 'rgba(34,197,94,1)'])
+  const glow = useTransform(fill, [0, 1], ['0 0 0px rgba(34,197,94,0)', '0 0 20px rgba(34,197,94,0.6)'])
+  const textCol = useTransform(fill, [0, 1], ['#22c55e', '#0a0a0a'])
   const pts = dotPositions(count)
   const offsetX = pts[index].x - 32
 
   return (
     <motion.div
-      style={{
-        backgroundColor: bg,
-        transform: `translateX(${offsetX}px)`,
-      }}
-      className="w-12 h-12 rounded-full border-2 border-green-500 flex items-center justify-center z-10 relative shadow-lg shadow-green-500/25 transition-colors"
+      style={{ backgroundColor: bg, boxShadow: glow, transform: `translateX(${offsetX}px)` }}
+      className="w-12 h-12 rounded-full border-2 border-green-500/60 flex items-center justify-center z-10 relative"
     >
       <motion.span
-        style={{ color: textColor, fontFamily: "'Instrument Serif', serif" }}
+        style={{ color: textCol, fontFamily: "'Instrument Serif', serif" }}
         className="font-bold text-xs"
       >
         {milestone.number}
@@ -152,35 +152,32 @@ function TimelineDot({ milestone, index, progress, count }: {
 function TimelineRow({ milestone, index, progress, count }: {
   milestone: typeof milestones[0]; index: number; progress: any; count: number
 }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, amount: 0.5, margin: "0px 0px -120px 0px" })
-  const isLeft = milestone.side === "left"
+  const threshold = count > 1 ? index / (count - 1) : 0
+  const cardOpacity = useTransform(progress, [threshold - 0.04, threshold + 0.06], [0, 1])
+  const cardY = useTransform(progress, [threshold - 0.04, threshold + 0.06], [32, 0])
+  const cardX_left = useTransform(progress, [threshold - 0.04, threshold + 0.06], [60, 0])
+  const cardX_right = useTransform(progress, [threshold - 0.04, threshold + 0.06], [-60, 0])
+  const isLeft = milestone.side === 'left'
 
   return (
-    <div ref={ref} className="relative grid grid-cols-[1fr_64px_1fr] items-start gap-0 mb-0">
-      <div className={`py-10 pr-8 ${isLeft ? "flex justify-end" : ""}`}>
+    <div className="relative grid grid-cols-[1fr_64px_1fr] items-start gap-0 mb-0">
+      <div className={`py-10 pr-8 ${isLeft ? 'flex justify-end' : ''}`}>
         {isLeft && (
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
+            style={{ opacity: cardOpacity, x: cardX_left, y: cardY }}
             className="w-full max-w-sm"
           >
             <MilestoneCard milestone={milestone} />
           </motion.div>
         )}
       </div>
-
       <div className="flex flex-col items-center pt-10">
         <TimelineDot milestone={milestone} index={index} progress={progress} count={count} />
       </div>
-
-      <div className={`py-10 pl-8 ${!isLeft ? "flex justify-start" : ""}`}>
+      <div className={`py-10 pl-8 ${!isLeft ? 'flex justify-start' : ''}`}>
         {!isLeft && (
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
+            style={{ opacity: cardOpacity, x: cardX_right, y: cardY }}
             className="w-full max-w-sm"
           >
             <MilestoneCard milestone={milestone} />
@@ -196,9 +193,9 @@ export function RCIIFStoryTimeline() {
   // End offset pulled in so the line completes when the LAST card (point 5) is in view
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
-    offset: ["start 0.75", "end 0.85"],
+    offset: ["start 0.8", "end 0.6"],
   })
-  const progress = useSpring(scrollYProgress, { stiffness: 60, damping: 25, restDelta: 0.001 })
+  const progress = useSpring(scrollYProgress, { stiffness: 35, damping: 20, restDelta: 0.0005 })
 
   return (
     <section className="w-full py-24 px-4 bg-[#0a0a0a] text-white overflow-hidden">
