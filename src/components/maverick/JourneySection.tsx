@@ -100,18 +100,6 @@ export default function JourneySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className={`relative flex-shrink-0 snap-start w-[82vw] lg:w-[360px] rounded-2xl border bg-white/[0.03] backdrop-blur-sm p-8 transition-colors duration-500 group ${
-              activeStep === i ? "border-green-500/50" : "border-white/10 hover:border-green-500/30"
-            }`}
-          >
-            {/* Big watermark number */}
-            <div
-              className="absolute -right-4 -top-4 text-[120px] font-bold leading-none select-none pointer-events-none text-white/[0.05] group-hover:text-green-500/[0.1] transition-colors duration-500"
-              style={{ fontFamily: "'Instrument Serif', serif" }}
-            >
-              {s.number}
-            </div>
-
             className={`relative flex-shrink-0 snap-start w-[82vw] lg:w-[380px] rounded-3xl border p-8 md:p-10 transition-all duration-500 group ${
               activeStep === i
                 ? 'border-green-500/60 bg-green-950/20 shadow-[0_0_40px_-12px_rgba(34,197,94,0.35)]'
