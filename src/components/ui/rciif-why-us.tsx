@@ -258,27 +258,138 @@ export function RCIIFWhyUs() {
 
           <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
             <motion.div className="relative w-full max-w-xs" variants={itemVariants}>
+              {/* Outer glow halo */}
               <motion.div
-                className="rciif-center-card rounded-xl overflow-hidden shadow-2xl shadow-green-500/10 border border-green-500/20"
-                initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }} whileHover={{ scale: 1.03 }}
+                aria-hidden
+                className="absolute -inset-6 rounded-[28px] z-[-2]"
+                style={{
+                  background:
+                    "radial-gradient(60% 50% at 50% 0%, rgba(34,197,94,0.35), transparent 70%), radial-gradient(60% 50% at 50% 100%, rgba(16,185,129,0.25), transparent 70%)",
+                  filter: "blur(20px)",
+                }}
+                animate={{ opacity: [0.55, 0.85, 0.55] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              <motion.div
+                className="rciif-center-card relative rounded-2xl overflow-hidden border border-white/15"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 45%, rgba(34,197,94,0.08) 100%)",
+                  backdropFilter: "blur(22px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(22px) saturate(160%)",
+                  boxShadow:
+                    "0 30px 80px -30px rgba(34,197,94,0.45), 0 0 0 1px rgba(255,255,255,0.06) inset, 0 1px 0 rgba(255,255,255,0.18) inset",
+                }}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                whileHover={{ scale: 1.03, y: -4 }}
               >
-                <div className="w-full aspect-[3/4] bg-gradient-to-br from-green-900/40 via-[#0a0a0a] to-emerald-900/20 flex flex-col items-center justify-center gap-6 p-8">
-                  <div className="w-24 h-24 rounded-full bg-green-500/20 border-2 border-green-500/40 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg text-center leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>RCIIF</span>
-                  </div>
+                {/* Sheen highlight */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 pointer-events-none opacity-60"
+                  style={{
+                    background:
+                      "linear-gradient(115deg, transparent 0%, transparent 35%, rgba(255,255,255,0.10) 50%, transparent 65%, transparent 100%)",
+                  }}
+                />
+                {/* Corner glow */}
+                <div
+                  aria-hidden
+                  className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
+                  style={{ background: "radial-gradient(circle, rgba(74,222,128,0.35), transparent 70%)" }}
+                />
+                <div
+                  aria-hidden
+                  className="absolute -bottom-12 -left-12 w-44 h-44 rounded-full pointer-events-none"
+                  style={{ background: "radial-gradient(circle, rgba(16,185,129,0.25), transparent 70%)" }}
+                />
+
+                <div className="w-full aspect-[3/4] flex flex-col items-center justify-center gap-5 p-7 relative z-10">
+                  {/* Eyebrow */}
+                  <span
+                    className="text-green-400 uppercase"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "10px",
+                      letterSpacing: "0.28em",
+                    }}
+                  >
+                    ◆ Since 2022
+                  </span>
+
+                  {/* Glass monogram */}
+                  <motion.div
+                    className="relative w-24 h-24 rounded-full flex items-center justify-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(34,197,94,0.25), rgba(255,255,255,0.05))",
+                      border: "1px solid rgba(74,222,128,0.45)",
+                      boxShadow:
+                        "0 0 30px rgba(34,197,94,0.35), inset 0 1px 0 rgba(255,255,255,0.25)",
+                      backdropFilter: "blur(8px)",
+                    }}
+                    animate={{ boxShadow: [
+                      "0 0 20px rgba(34,197,94,0.25), inset 0 1px 0 rgba(255,255,255,0.25)",
+                      "0 0 40px rgba(34,197,94,0.55), inset 0 1px 0 rgba(255,255,255,0.25)",
+                      "0 0 20px rgba(34,197,94,0.25), inset 0 1px 0 rgba(255,255,255,0.25)",
+                    ] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <span
+                      className="text-white font-bold text-xl tracking-wider"
+                      style={{ fontFamily: "'Instrument Serif', serif", textShadow: "0 0 12px rgba(74,222,128,0.6)" }}
+                    >
+                      RCIIF
+                    </span>
+                  </motion.div>
+
+                  {/* Title block */}
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white" style={{ fontFamily: "'Instrument Serif', serif" }}>Research Centre for</div>
-                    <div className="rciif-accent text-green-400 text-sm mt-1" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>Innovation & Incubation</div>
+                    <div
+                      className="text-white leading-[1.1]"
+                      style={{ fontFamily: "'Instrument Serif', serif", fontSize: "1.35rem" }}
+                    >
+                      Research Centre for
+                      <br />
+                      <em className="italic text-green-400">Innovation & Incubation</em>
+                    </div>
+                    <div className="w-10 h-px bg-gradient-to-r from-transparent via-green-400/70 to-transparent mx-auto mt-3" />
                   </div>
-                  <div className="grid grid-cols-2 gap-3 w-full">
-                    {["Est. 2022", "12+ Incubatees", "Kharghar, MH", "DPIIT Backed"].map(tag => (
-                      <div key={tag} className="rciif-tag bg-white/5 border border-green-500/20 rounded-lg px-3 py-2 text-center text-xs text-white/70" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>{tag}</div>
+
+                  {/* Tags */}
+                  <div className="grid grid-cols-2 gap-2 w-full mt-1">
+                    {["Est. 2022", "12+ Incubatees", "Kharghar, MH", "DPIIT Backed"].map((tag, i) => (
+                      <motion.div
+                        key={tag}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + i * 0.08 }}
+                        className="rounded-lg px-2.5 py-1.5 text-center text-[11px] text-white/85 transition-colors"
+                        style={{
+                          background: "rgba(255,255,255,0.06)",
+                          border: "1px solid rgba(74,222,128,0.22)",
+                          backdropFilter: "blur(6px)",
+                          fontFamily: "'Instrument Sans', sans-serif",
+                          letterSpacing: "0.02em",
+                        }}
+                      >
+                        {tag}
+                      </motion.div>
                     ))}
                   </div>
                 </div>
               </motion.div>
-              <motion.div className="absolute inset-0 border-2 border-green-500/20 rounded-xl -m-3 z-[-1]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }} />
+
+              {/* Outline ring */}
+              <motion.div
+                className="absolute inset-0 border border-green-500/25 rounded-2xl -m-3 z-[-1]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              />
             </motion.div>
           </div>
 
