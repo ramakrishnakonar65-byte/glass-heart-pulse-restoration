@@ -124,33 +124,86 @@ export default function FounderNeedsSection() {
 
           <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
             <motion.div className="relative w-full max-w-xs" variants={itemVariants}>
+              {/* Halo */}
               <motion.div
-                className="rciif-center-card relative rounded-2xl overflow-hidden shadow-2xl shadow-green-500/15 border border-green-500/25 bg-gradient-to-b from-[#0d1f12] via-[#0a0a0a] to-[#0d1f12]"
+                aria-hidden
+                className="absolute -inset-6 rounded-[28px] z-[-2]"
+                style={{
+                  background:
+                    "radial-gradient(60% 50% at 50% 0%, rgba(34,197,94,0.35), transparent 70%), radial-gradient(60% 50% at 50% 100%, rgba(16,185,129,0.25), transparent 70%)",
+                  filter: "blur(20px)",
+                }}
+                animate={{ opacity: [0.55, 0.85, 0.55] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              />
+
+              <motion.div
+                className="rciif-center-card relative rounded-2xl overflow-hidden border border-white/15"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 45%, rgba(34,197,94,0.08) 100%)",
+                  backdropFilter: "blur(22px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(22px) saturate(160%)",
+                  boxShadow:
+                    "0 30px 80px -30px rgba(34,197,94,0.45), 0 0 0 1px rgba(255,255,255,0.06) inset, 0 1px 0 rgba(255,255,255,0.18) inset",
+                }}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, y: -4 }}
               >
-                <div className="w-full aspect-[3/4] flex flex-col p-7 relative">
-                  {/* Top section — identity */}
+                {/* Sheen */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0 pointer-events-none opacity-60"
+                  style={{
+                    background:
+                      "linear-gradient(115deg, transparent 0%, transparent 35%, rgba(255,255,255,0.10) 50%, transparent 65%, transparent 100%)",
+                  }}
+                />
+                {/* Corner glows */}
+                <div
+                  aria-hidden
+                  className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
+                  style={{ background: "radial-gradient(circle, rgba(74,222,128,0.35), transparent 70%)" }}
+                />
+                <div
+                  aria-hidden
+                  className="absolute -bottom-12 -left-12 w-44 h-44 rounded-full pointer-events-none"
+                  style={{ background: "radial-gradient(circle, rgba(16,185,129,0.22), transparent 70%)" }}
+                />
+
+                <div className="w-full aspect-[3/4] flex flex-col p-7 relative z-10">
+                  {/* Identity */}
                   <div className="flex flex-col items-center text-center mb-6">
                     <span
-                      className="text-green-400 font-[Instrument_Sans] uppercase mb-3"
-                      style={{ fontSize: "10px", letterSpacing: "0.22em" }}
+                      className="text-green-400 uppercase mb-3"
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "10px",
+                        letterSpacing: "0.28em",
+                      }}
                     >
-                      Maverick Pont
+                      ◆ Maverick Pont
                     </span>
-                    <h3 className="font-[Instrument_Serif] text-white leading-[1.05]" style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.1rem)" }}>
+                    <h3
+                      className="text-white leading-[1.05]"
+                      style={{
+                        fontFamily: "'Instrument Serif', serif",
+                        fontSize: "clamp(1.6rem, 3.2vw, 2.1rem)",
+                        textShadow: "0 1px 24px rgba(34,197,94,0.25)",
+                      }}
+                    >
                       Where
                       <br />
                       <em className="italic text-green-400">Founders</em>
                       <br />
                       Thrive
                     </h3>
-                    <div className="w-10 h-0.5 bg-green-500 mt-4" />
+                    <div className="w-10 h-px bg-gradient-to-r from-transparent via-green-400/70 to-transparent mt-4" />
                   </div>
 
-                  {/* Tags — vertical list */}
+                  {/* Tag pills */}
                   <div className="flex-1 flex flex-col gap-2.5 my-2">
                     {["Mentors", "Capital", "Network", "Growth"].map((tag, i) => (
                       <motion.div
@@ -158,38 +211,47 @@ export default function FounderNeedsSection() {
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.5 + i * 0.08, duration: 0.4 }}
-                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.06] hover:border-green-500/30 transition-colors"
+                        whileHover={{ x: 4 }}
+                        className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                          backdropFilter: "blur(6px)",
+                        }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
-                        <span className="text-white/85 font-[Instrument_Sans]" style={{ fontSize: "13px", letterSpacing: "0.02em" }}>
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+                        <span
+                          className="text-white/90"
+                          style={{
+                            fontFamily: "'Instrument Sans', sans-serif",
+                            fontSize: "13px",
+                            letterSpacing: "0.02em",
+                          }}
+                        >
                           {tag}
                         </span>
                       </motion.div>
                     ))}
                   </div>
 
-                  {/* Bottom identity tag */}
-                  <div className="pt-4 mt-2 border-t border-white/[0.06] text-center">
+                  {/* Footer */}
+                  <div className="pt-4 mt-2 border-t border-white/[0.08] text-center">
                     <span
-                      className="text-white/40 font-[Instrument_Sans] uppercase"
-                      style={{ fontSize: "9px", letterSpacing: "0.2em" }}
+                      className="text-white/50 uppercase"
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "9px",
+                        letterSpacing: "0.22em",
+                      }}
                     >
                       RCIIF · Kharghar, MH · Est. 2022
                     </span>
                   </div>
-
-                  {/* Decorative corner accent */}
-                  <div
-                    aria-hidden
-                    className="absolute top-0 right-0 w-20 h-20 pointer-events-none"
-                    style={{
-                      background: "radial-gradient(circle at top right, rgba(34,197,94,0.18), transparent 70%)",
-                    }}
-                  />
                 </div>
               </motion.div>
+
               <motion.div
-                className="absolute inset-0 border-2 border-green-500/20 rounded-2xl -m-3 z-[-1]"
+                className="absolute inset-0 border border-green-500/25 rounded-2xl -m-3 z-[-1]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
