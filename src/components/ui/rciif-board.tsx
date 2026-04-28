@@ -58,11 +58,17 @@ export function RCIIFBoard() {
                   {m.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
                 </div>
               </div>
-              <div className="p-4 text-center flex flex-col justify-center" style={{ minHeight: "84px" }}>
-                <h3 className="text-white text-sm font-bold leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>
+              <div className="p-4 text-center flex flex-col justify-center items-center gap-1.5" style={{ minHeight: "96px" }}>
+                <h3
+                  className="text-white font-semibold leading-tight line-clamp-2"
+                  style={{ fontFamily: "'Instrument Serif', serif", fontSize: "15px", letterSpacing: "-0.01em" }}
+                >
                   {m.name}
                 </h3>
-                <p className="text-green-400 text-xs mt-1" style={{ fontFamily: "'Instrument Sans', sans-serif" }}>
+                <p
+                  className="text-green-400 uppercase"
+                  style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.14em" }}
+                >
                   {m.role}
                 </p>
               </div>

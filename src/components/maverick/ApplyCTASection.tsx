@@ -1,18 +1,8 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import { useRef, useEffect } from "react"
-import Lottie from "lottie-react"
-import { useState } from "react"
+import InteractiveApplyIllustration from "./InteractiveApplyIllustration"
 
 export default function ApplyCTASection() {
-  const [animationData, setAnimationData] = useState<any>(null)
-
-  useEffect(() => {
-    fetch("/finance.json")
-      .then(res => res.json())
-      .then(setAnimationData)
-      .catch(() => {})
-  }, [])
 
   return (
     <section className="w-full py-20 md:py-24 px-4 bg-[#0a0a0a]">
@@ -40,13 +30,9 @@ export default function ApplyCTASection() {
               </motion.a>
             </div>
 
-            {/* Right: Lottie Animation */}
-            <div className="w-full md:w-1/2 max-w-xs mx-auto flex-shrink-0 opacity-90">
-              {animationData ? (
-                <Lottie animationData={animationData} loop autoplay className="w-full h-auto drop-shadow-2xl" />
-              ) : (
-                <div className="w-full aspect-square bg-green-500/10 rounded-2xl animate-pulse" />
-              )}
+            {/* Right: Interactive Illustration */}
+            <div className="w-full md:w-1/2 max-w-xs mx-auto flex-shrink-0">
+              <InteractiveApplyIllustration />
             </div>
           </div>
 
